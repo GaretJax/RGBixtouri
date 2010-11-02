@@ -49,7 +49,7 @@ public class RGBixtouri extends JFrame{
     graphesPanel = new GraphesPanel();
     graphesPanel.setBackground(Color.blue);
     clustersPanel = new ClustersPanel();
-    clustersPanel.setBackground(Color.gray);
+    clustersPanel.setBackground(Color.yellow);
     
     this.add(imageSelectorPanel, "B");
     this.add(imagePanel, "I");
