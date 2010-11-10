@@ -12,7 +12,7 @@ import java.util.Vector;
 
 import javax.swing.JPanel;
 
-import rgbixtouri.alpha.alphaLayoutManager.ImageSelection.areaCollectionType;
+import rgbixtouri.alpha.alphaLayoutManager.ImageSelection;
 
 public class Chart2D extends JPanel implements Observer {
 	private static final long serialVersionUID = 1L;
@@ -117,7 +117,7 @@ public class Chart2D extends JPanel implements Observer {
 	@Override 
 	public void update(Observable arg0, Object selection) {
 		ImageSelection imageSelection = (ImageSelection) selection;
-		AreaCollection wound=imageSelection.getAreaCollection(areaCollectionType.WOUND);
+		AreaCollection wound=imageSelection.getArea(ImageSelection.WOUND);
 		int[] woundColors=wound.getColors();
 		
 		pixelsInWound.clear();
@@ -148,7 +148,7 @@ public class Chart2D extends JPanel implements Observer {
 				pixelsInWound.add(new Point(green, blue));
 			}
 		}
-		AreaCollection skin=imageSelection.getAreaCollection(areaCollectionType.SKIN);
+		AreaCollection skin=imageSelection.getArea(ImageSelection.SKIN);
 		int[] skinColors=skin.getColors();
 		
 		pixelsInSkin.clear();

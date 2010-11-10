@@ -10,7 +10,7 @@ import org.jzy3d.maths.Coord3d;
 import org.jzy3d.plot3d.primitives.Scatter;
 import org.jzy3d.plot3d.rendering.view.modes.CameraMode;
 
-import rgbixtouri.alpha.alphaLayoutManager.ImageSelection.areaCollectionType;
+import rgbixtouri.alpha.alphaLayoutManager.ImageSelection;
 
 public class Chart3D extends Chart implements Observer{
 	String xAxeName;
@@ -41,7 +41,7 @@ public class Chart3D extends Chart implements Observer{
 	@Override
 	public void update(Observable o, Object selection) {
 		ImageSelection imageSelection = (ImageSelection) selection;
-		AreaCollection wound=imageSelection.getAreaCollection(areaCollectionType.WOUND);
+		AreaCollection wound=imageSelection.getArea(ImageSelection.WOUND);
 		int[] woundColors=wound.getColors();
 
 		pixels.clear();
@@ -55,7 +55,7 @@ public class Chart3D extends Chart implements Observer{
 			colors.add(Color.RED);
 		}	
 
-		AreaCollection skin=imageSelection.getAreaCollection(areaCollectionType.SKIN);
+		AreaCollection skin=imageSelection.getArea(ImageSelection.SKIN);
 		int[] skinColors=skin.getColors();
 		
 		for (int color : skinColors) {
