@@ -1,7 +1,6 @@
 package selector.advanced;
 
 import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.Rectangle;
@@ -10,7 +9,6 @@ import java.awt.event.ComponentListener;
 import java.awt.geom.Area;
 import java.util.Vector;
 
-import javax.swing.JComponent;
 import javax.swing.JLayeredPane;
 
 import selector.advanced.models.ImageModel;

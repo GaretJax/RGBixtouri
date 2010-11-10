@@ -1,7 +1,6 @@
 package rgbixtouri.alpha.alphaLayoutManager;
 
 import java.awt.Dimension;
-import java.io.IOException;
 
 import javax.swing.JFrame;
 
@@ -20,8 +19,7 @@ public class RGBixtouri extends JFrame{
 	private static final long serialVersionUID = 1L;
 	
 	private ImageLibraryPanel imageSelectorPanel;
-	public selector.advanced.ImagePanel imagePanel; 
-	private ParametersPanel parametersPanel;
+	public selector.advanced.ImagePanel imagePanel;
 	public GraphesPanel graphesPanel;
 	private ClustersPanel clustersPanel;
 
@@ -59,8 +57,6 @@ public class RGBixtouri extends JFrame{
 		imageSelectorPanel = new ImageLibraryPanel(this);
 		imageSelectorPanel.setPreferredSize(new Dimension(200,200));
 		imagePanel.setPreferredSize(new Dimension(300,300));
-		parametersPanel = new ParametersPanel();
-		parametersPanel.setPreferredSize(new Dimension(300,150));
 		graphesPanel = new GraphesPanel();
 		graphesPanel.setPreferredSize(new Dimension(300,300));
 		clustersPanel = new ClustersPanel();
@@ -68,7 +64,6 @@ public class RGBixtouri extends JFrame{
 
 		this.add(imageSelectorPanel, "B");
 		this.add(imagePanel, "I");
-		//this.add(parametersPanel, "P");
 		this.add(graphesPanel, "G");
 		this.add(clustersPanel, "C");
 		

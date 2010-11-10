@@ -20,6 +20,7 @@ import javax.swing.event.AncestorListener;
 
 public class SelectedArea extends JComponent implements AncestorListener, FocusListener, MouseListener  {
     
+    private static final long serialVersionUID = 1193609448831953910L;
     private final Area area; 
     private final SelectionPanel container;
     

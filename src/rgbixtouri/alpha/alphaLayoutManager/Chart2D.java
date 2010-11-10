@@ -45,7 +45,7 @@ public class Chart2D extends JPanel implements Observer {
 		pixelsInSkin = new Vector<Point>();
 	}
 
-	public void paintComponent(Graphics g){
+	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		setBackground(bgColor);
 		Graphics2D g2d = (Graphics2D)g;

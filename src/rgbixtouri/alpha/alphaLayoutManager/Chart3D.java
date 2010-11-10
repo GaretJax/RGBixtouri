@@ -8,7 +8,6 @@ import org.jzy3d.chart.Chart;
 import org.jzy3d.colors.Color;
 import org.jzy3d.maths.Coord3d;
 import org.jzy3d.plot3d.primitives.Scatter;
-import org.jzy3d.plot3d.rendering.view.modes.CameraMode;
 
 import rgbixtouri.alpha.alphaLayoutManager.ImageSelection;
 
