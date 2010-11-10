@@ -46,17 +46,17 @@ public class RGBixtouri extends JFrame{
 		zLayout.compile();
 
 		zLayout.getZone("B").setTake(0, 100);
-		zLayout.getZone("I").setTake(100, 100);
-		zLayout.getZone("G").setTake(100, 100);
-		zLayout.getZone("C").setTake(100, 100);
-		zLayout.getZone("P").setTake(50, 100);
+		zLayout.getZone("I").setTake(100, 90);
+		zLayout.getZone("G").setTake(100, 90);
+		zLayout.getZone("C").setTake(100, 10);
+		zLayout.getZone("P").setTake(50, 10);
 		this.setLayout(zLayout);
 
 		setSize(new Dimension(800, 600));
 		setMinimumSize(new Dimension(400,300));
 
 		//creation and setting of the panels
-		imageSelectorPanel = new ImageLibraryPanel();
+		imageSelectorPanel = new ImageLibraryPanel(this);
 		imageSelectorPanel.setPreferredSize(new Dimension(200,200));
 		try {
 			imagePanel = new ImagePanel("assets/wound1.jpg");
@@ -77,6 +77,8 @@ public class RGBixtouri extends JFrame{
 		this.add(parametersPanel, "P");
 		this.add(graphesPanel, "G");
 		this.add(clustersPanel, "C");
+		
+		
 	}
 
 	public static void main(String[] args) {
