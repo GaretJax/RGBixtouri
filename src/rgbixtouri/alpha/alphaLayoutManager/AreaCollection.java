@@ -2,7 +2,6 @@ package rgbixtouri.alpha.alphaLayoutManager;
 
 import java.awt.Point;
 import java.awt.geom.Area;
-import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -18,7 +17,7 @@ public class AreaCollection extends Observable {
 
 	public AreaCollection(ImageSelection parent){
 		this.parent=parent;
-		//image=parent.getImage();
+		image=parent.getImage();
 	}
 	
 	public void addArea(Area area){
@@ -34,18 +33,33 @@ public class AreaCollection extends Observable {
 		double[] tab = new double[6];
 		int rgb;
 		Set<Integer> pixelsVisited = new HashSet<Integer>();
-		Point firstPoint;
+		Point firstPixel;
 		Queue<Point> pixelsToVisit = new LinkedList<Point>();
 		for (Area area : areas) {
 			area.getPathIterator(null).currentSegment(tab);
-			firstPoint = new Point((int)tab[0], (int)tab[1]);
+			firstPixel = new Point((int)tab[0], (int)tab[1]);
 			
-			rgb = image.getRGB(firstPoint.x, firstPoint.y);
+			rgb = image.getRGB(firstPixel.x, firstPixel.y);
 			colors.add(rgb);
-			pixelsVisited.add(getPixelIndex(firstPoint));
+			pixelsVisited.add(getPixelIndex(firstPixel));
 			
-			for (Point neighbor : getNeighbors(firstPoint, area)) {
+			for (Point neighbor : getNeighbors(firstPixel, area)) {
 				pixelsToVisit.add(neighbor);
+			}
+			
+			//
+			Point pixel;
+			while(!pixelsToVisit.isEmpty()){
+				pixel=pixelsToVisit.poll();
+				if(!pixelsVisited.contains(getPixelIndex(pixel))){
+					rgb = image.getRGB(pixel.x, pixel.y);
+					colors.add(rgb);
+					pixelsVisited.add(getPixelIndex(pixel));
+					for (Point neighbor : getNeighbors(pixel, area)) {
+						if(!pixelsVisited.contains(getPixelIndex(neighbor)))
+							pixelsToVisit.add(neighbor);
+					}
+				}
 			}
 		}
 		return colors.toArray(new Integer[1]);
