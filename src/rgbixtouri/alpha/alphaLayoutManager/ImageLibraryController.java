@@ -1,10 +1,8 @@
 package rgbixtouri.alpha.alphaLayoutManager;
 
-import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FilenameFilter;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -13,10 +11,12 @@ import javax.swing.filechooser.FileFilter;
 /**
  * @author Stéphane
  */
-public class ImageLibraryController implements ActionListener{
+public class ImageLibraryController implements ActionListener {
 
-	ImageLibraryPanel parent;
-	ImageListModel listModel;
+	private ImageLibraryPanel parent;
+	private ImageListModel listModel;
+	private ProgressDialog progressDialog;
+	private File f;
 
 	public ImageLibraryController(ImageLibraryPanel parent, ImageListModel listModel){
 		this.parent=parent;
@@ -62,14 +62,10 @@ public class ImageLibraryController implements ActionListener{
 			int action = fc.showOpenDialog(parent);
 			if(action == JFileChooser.APPROVE_OPTION){
 				String folderName = fc.getSelectedFile().getAbsolutePath();
-				File f = new File(folderName);
+				f = new File(folderName);
 				if(f.exists()){
-					listModel.emptyImage();
-					parent.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-					for (String imageName : f.list(new ImageNameFilter())) {
-						listModel.addImage(f.getAbsolutePath()+"\\"+imageName);
-					}
-					parent.setCursor(Cursor.getDefaultCursor());
+					//folder loading		
+					progressDialog=new ProgressDialog(parent.mainFrame, listModel, f);
 				} else{
 					String errorMessage="Le dossier choisi n'est pas existant ("+f+")";
 					JOptionPane.showMessageDialog(parent, errorMessage, "Problem", JOptionPane.ERROR_MESSAGE);
@@ -108,25 +104,5 @@ public class ImageLibraryController implements ActionListener{
 		}
 	}
 
-	class ImageNameFilter implements FilenameFilter{
-
-		@Override
-		public boolean accept(File dir, String name) {
-			String extension = Utils.getExtension(new File(dir+name));
-			if (extension != null) {
-				if (extension.equals(Utils.tiff) ||
-						extension.equals(Utils.tif) ||
-						extension.equals(Utils.gif) ||
-						extension.equals(Utils.jpeg) ||
-						extension.equals(Utils.jpg) ||
-						extension.equals(Utils.bmp) ||
-						extension.equals(Utils.png)) {
-					return true;
-				} else {
-					return false;
-				}
-			}
-			return false;
-		}
-	}
+	
 }

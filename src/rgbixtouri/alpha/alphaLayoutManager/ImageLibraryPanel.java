@@ -1,14 +1,11 @@
 package rgbixtouri.alpha.alphaLayoutManager;
 
-import java.awt.Color;
-import java.awt.Component;
+import java.awt.Frame;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.ListCellRenderer;
 import javax.swing.ListSelectionModel;
 
 import net.miginfocom.swing.MigLayout;
@@ -27,11 +24,14 @@ public class ImageLibraryPanel extends JPanel {
 	private JButton imageButton;
 	private JButton folderButton;
 	
+	public Frame mainFrame;
+	
 	private ImageLibraryController controler;
 
 	private ImageListModel listModel;
 
-	public ImageLibraryPanel(){
+	public ImageLibraryPanel(Frame mainFrame){
+		this.mainFrame=mainFrame;
 		listModel = new ImageListModel();
 		listModel.addPropertyChangeListener(new ImageLibraryListener(this));
 
