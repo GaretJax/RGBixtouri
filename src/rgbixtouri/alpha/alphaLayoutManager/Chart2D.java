@@ -13,6 +13,7 @@ import java.util.Vector;
 import javax.swing.JPanel;
 
 import rgbixtouri.alpha.alphaLayoutManager.ImageSelection;
+import selector.advanced.models.ImageModel;
 
 public class Chart2D extends JPanel implements Observer {
 	private static final long serialVersionUID = 1L;
@@ -111,7 +112,7 @@ public class Chart2D extends JPanel implements Observer {
 		return new Point(x, y); 
 	}
 
-	public void selectedImageChanged(ImageSelection is){
+	public void selectedImageChanged(ImageModel is){
 		//TODO
 		is.addObserver(this);
 		update(is, is);
