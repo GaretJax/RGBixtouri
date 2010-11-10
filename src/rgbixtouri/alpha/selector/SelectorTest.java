@@ -6,6 +6,7 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Point;
 import java.io.IOException;
 
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -19,7 +20,7 @@ public class SelectorTest extends JFrame {
 	}
 
 	private void buildUI(boolean fullscreen) {
-		JPanel imagePanel = null;
+		JComponent imagePanel = null;
 
 		try {
 			imagePanel = new ImagePanel("assets/wound1.jpg");

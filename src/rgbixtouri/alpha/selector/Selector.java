@@ -1,20 +1,18 @@
 package rgbixtouri.alpha.selector;
 
-import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
 import java.awt.RenderingHints;
-import java.awt.Shape;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 import java.awt.geom.PathIterator;
 
 import javax.swing.JComponent;
 
-public class Selector extends JComponent {
+class Selector extends JComponent {
 
 	private static final long serialVersionUID = -7906905420333424845L;
 	

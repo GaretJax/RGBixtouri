@@ -7,7 +7,6 @@ import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
-import java.awt.Shape;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
@@ -61,7 +60,7 @@ public class SelectedArea extends JComponent implements AncestorListener, FocusL
     protected void recalculateBounds() {
         Area area = this.getArea();
         double ratio = this.getRatio();
-        int s = ((SelectorPanel) this.getParent()).getHandleSize();
+        int s = ((EditorPanel) this.getParent()).getHandleSize();
         
         AffineTransform at = new AffineTransform();
         at.scale(ratio, ratio);
@@ -73,7 +72,7 @@ public class SelectedArea extends JComponent implements AncestorListener, FocusL
     }
     
     private double getRatio() {
-        return ((SelectorPanel) this.getParent()).getRatio();
+        return ((EditorPanel) this.getParent()).getRatio();
     }
     
     public void paintComponent(Graphics g) {
@@ -95,7 +94,7 @@ public class SelectedArea extends JComponent implements AncestorListener, FocusL
             
             double[] segment = new double[6];
             
-            int s = ((SelectorPanel) this.getParent()).getHandleSize();
+            int s = ((EditorPanel) this.getParent()).getHandleSize();
             
             PathIterator itr = area.getPathIterator(null);
             
