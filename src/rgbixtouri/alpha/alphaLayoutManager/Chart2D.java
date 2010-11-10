@@ -42,8 +42,6 @@ public class Chart2D extends JPanel implements Observer {
 		
 		pixelsInWound = new Vector<Point>();
 		pixelsInSkin = new Vector<Point>();
-		ImageSelection factice= new ImageSelection();
-		update(null, factice);
 	}
 
 	public void paintComponent(Graphics g){
@@ -113,9 +111,14 @@ public class Chart2D extends JPanel implements Observer {
 		return new Point(x, y); 
 	}
 
+	public void selectedImageChanged(ImageSelection is){
+		//TODO
+		is.addObserver(this);
+		update(is, is);
+	}
 
 	@Override 
-	public void update(Observable arg0, Object selection) {
+	public void update(Observable selection, Object _) {
 		ImageSelection imageSelection = (ImageSelection) selection;
 		AreaCollection wound=imageSelection.getArea(ImageSelection.WOUND);
 		Integer[] woundColors=wound.getColors();

@@ -27,9 +27,7 @@ public class Chart3D extends Chart implements Observer{
 		this.zAxeName=zName;
 		pixels=new Vector<Coord3d>();
 		colors=new Vector<Color>();
-		ImageSelection factice= new ImageSelection();
-		update(null, factice);
-		Scatter scatter = new Scatter(pixels.toArray(new Coord3d[1]), colors.toArray(new Color[1]));
+		Scatter scatter = new Scatter(); //pixels.toArray(new Coord3d[1]), colors.toArray(new Color[1])
 		this.getScene().add(scatter);
 		scatter.setWidth(10);
 		this.getAxeLayout().setXAxeLabel(xAxeName);

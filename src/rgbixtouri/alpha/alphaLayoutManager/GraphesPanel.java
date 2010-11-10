@@ -19,6 +19,12 @@ import com.atticlabs.zonelayout.swing.ZoneLayoutFactory;
 public class GraphesPanel extends JPanel{
 	private static final long serialVersionUID = 1L;
 	
+	public Chart2D rgChart;
+	public Chart2D rbChart;
+	public Chart2D gbChart;
+	public Chart3D rgbChart;
+	
+	
 	public GraphesPanel(){
 		
 		//Zone layout is the layout manager used
@@ -32,11 +38,11 @@ public class GraphesPanel extends JPanel{
 		zLayout.getZone("d").setTake(100, 77);
 		this.setLayout(zLayout);
 		
-		Chart2D rgChart=new Chart2D("RG", "R", "G", Color.WHITE, chartType.RG);
-		Chart2D rbChart=new Chart2D("RB", "R", "B", Color.WHITE, chartType.RB);
-		Chart2D gbChart=new Chart2D("GB", "G", "B", Color.WHITE, chartType.GB);
+		rgChart=new Chart2D("RG", "R", "G", Color.WHITE, chartType.RG);
+		rbChart=new Chart2D("RB", "R", "B", Color.WHITE, chartType.RB);
+		gbChart=new Chart2D("GB", "G", "B", Color.WHITE, chartType.GB);
 //		Chart2D rgbChart=new Chart2D("RGB", "3d", "3d", Color.WHITE, chartType.RG);
-		Chart3D rgbChart=new Chart3D("Red", "Green", "Blue");		
+		rgbChart=new Chart3D("Red", "Green", "Blue");		
 		
 		this.add(rgChart, "a");
 		this.add(rbChart, "b");

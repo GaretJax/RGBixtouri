@@ -19,24 +19,30 @@ public class ImageListModel extends AbstractListModel{
 	private PropertyChangeSupport pcs;
 	
 	private Vector<ImageIcon> imageList;
+	private Vector<String> imagePath;
 
 	public ImageListModel(){
 		pcs = new PropertyChangeSupport(this);
 		imageList = new Vector<ImageIcon>();
-		Image image=Toolkit.getDefaultToolkit().getImage("assets/wound1.jpg").getScaledInstance(100, 100, Image.SCALE_DEFAULT) ;
-		imageList.add(new ImageIcon(image));
+		imagePath = new Vector<String>();
+//		Image image=Toolkit.getDefaultToolkit().getImage("assets/wound1.jpg").getScaledInstance(100, 100, Image.SCALE_DEFAULT) ;
+//		imageList.add(new ImageIcon(image));
+//		imagePath.add("assets/wound1.jpg");
 	}
 	
 	public void emptyAndAddImage(String filename){
 		imageList.clear();
+		imagePath.clear();
 		Image image=Toolkit.getDefaultToolkit().getImage(filename).getScaledInstance(100, 100, Image.SCALE_DEFAULT);
 		imageList.add(new ImageIcon(image));
+		imagePath.add(filename);
 		pcs.firePropertyChange("imageList", this.getSize()-1, this.getSize());
 		System.out.println("add "+filename);
 	}
 	
 	public void emptyImage(){
 		imageList.clear();
+		imagePath.clear();
 	}
 	
 	public void addImage(String filename){
@@ -46,11 +52,16 @@ public class ImageListModel extends AbstractListModel{
 		double ratio=image.getHeight(null)/100;
 		image=image.getScaledInstance((int) (image.getWidth(null)/ratio), 100, Image.SCALE_DEFAULT);
 		imageList.add(new ImageIcon(image));
+		imagePath.add(filename);
 		pcs.firePropertyChange("imageList", this.getSize()-1, this.getSize());
 	}
 	
 	public void addPropertyChangeListener(PropertyChangeListener pcl){
 		pcs.addPropertyChangeListener("imageList", pcl);
+	}
+	
+	public String getImagePathAt(int index){
+		return imagePath.get(index);
 	}
 
 	@Override
