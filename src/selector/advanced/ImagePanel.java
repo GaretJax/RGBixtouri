@@ -1,4 +1,4 @@
-package rgbixtouri.alpha.selector;
+package selector.advanced;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -18,33 +18,27 @@ public class ImagePanel extends JLayeredPane implements ComponentListener {
 
 	private static final long serialVersionUID = 2044905103542084967L;
 
-	private final BufferedImage image;
+	private BufferedImage image;
 	private int width;
 	private int height;
 	private double ratio;
-	
-	private final AreasPanel selections;
-	private final EditorPanel editor;
 
-	public ImagePanel(String imagePath) throws IOException {
-		this(ImageIO.read(new File(imagePath)));
+	public ImagePanel() {
+	    this.setLayout(null);
+        this.addComponentListener(this);
 	}
-
-	public ImagePanel(BufferedImage image) {
+	
+	public void setImage(BufferedImage image) {
 		this.image = image;
+		
 		this.width = this.image.getWidth();
 		this.height = this.image.getHeight();
+		
 		this.ratio = this.width * 1. / this.height;
-		
-		this.setLayout(null);
-
-        this.selections = new AreasPanel();
-        this.add(this.selections);
-        
-		this.editor = new EditorPanel(this.width, this.height, this.selections);
-		this.add(this.editor);
-		
-		this.addComponentListener(this);
+	}
+	
+	public void setImage(String imagePath) throws IOException {
+	    this.setImage(ImageIO.read(new File(imagePath)));
 	}
 	
 	private Rectangle getImageBounds() {
@@ -96,7 +90,7 @@ public class ImagePanel extends JLayeredPane implements ComponentListener {
 
     @Override
     public void componentResized(ComponentEvent e) {
-        this.editor.setBounds(this.getImageBounds());
+        //this.editor.setBounds(this.getImageBounds());
     }
 
     @Override
