@@ -41,15 +41,14 @@ public class RGBixtouri extends JFrame{
 
 		//Zone layout is the layout manager used
 		ZoneLayout zLayout = ZoneLayoutFactory.newZoneLayout();
-		zLayout.addRow("B+I+IG+G");
-		zLayout.addRow(".BP+PC+C");
+		zLayout.addRow("B+I+.G+G");
+		zLayout.addRow(".B..IC+C");
 		zLayout.compile();
 
 		zLayout.getZone("B").setTake(0, 100);
 		zLayout.getZone("I").setTake(100, 90);
 		zLayout.getZone("G").setTake(100, 90);
 		zLayout.getZone("C").setTake(100, 10);
-		zLayout.getZone("P").setTake(50, 10);
 		this.setLayout(zLayout);
 
 		setSize(new Dimension(800, 600));
@@ -69,7 +68,7 @@ public class RGBixtouri extends JFrame{
 
 		this.add(imageSelectorPanel, "B");
 		this.add(imagePanel, "I");
-		this.add(parametersPanel, "P");
+		//this.add(parametersPanel, "P");
 		this.add(graphesPanel, "G");
 		this.add(clustersPanel, "C");
 		

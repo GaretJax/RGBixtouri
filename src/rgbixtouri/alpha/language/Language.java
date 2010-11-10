@@ -12,12 +12,13 @@ import java.util.ResourceBundle;
 public class Language {
 	
 	//Object use for Create the resourceBundle
-	private ResourceBundle resourceBundle;
-	private Locale currentLocale;
+	private static ResourceBundle resourceBundle;
 	
 	//Parameters for choose the language
-	private String language;
-	private String country;
+	private static String language;
+	private static String country;
+	
+	private static Language instanceOfLanguage;
 	
 	//Constant for the place of the properties files
 	final private String PROPERTIES_FILE_NAME = "rgbixtouri.alpha.language.MessageBundle";
@@ -25,39 +26,36 @@ public class Language {
 	/**
 	 * Basic constructor of resourceBundle (Use default language)
 	 */
-	public Language(){
-		//Set language and country (default)
-		language = Locale.getDefault().getLanguage();
-		country = Locale.getDefault().getCountry();
+	private Language(){
+		if(language == null && country == null){
+			//Set language and country (default)
+			language = Locale.getDefault().getLanguage();
+			country = Locale.getDefault().getCountry();
+		}
 		//Create the resourceBundle with the default locale
-		currentLocale = new Locale(language, country);
+		Locale currentLocale = new Locale(language, country);
 		resourceBundle = ResourceBundle.getBundle(PROPERTIES_FILE_NAME, currentLocale);
 	}
 	
 	/**
-	 * Constructor for choose the language and/or the country of resourceBundle
-	 * @param lang	Use for choose the language ("" or null d'ont modify the language)
-	 * @param coun	Use for choose the country (null d'ont modify the country)
+	 * Function for set the Language of the application
+	 * @param lang Languague to set
+	 * @param count Country to set
 	 */
-	public Language(String lang, String coun){
-		//Modify the language and the country with the parameters of user
-		if(!lang.equals("") && lang != null){
-			this.language = lang;
-		}
-		if(coun != null){
-			this.country = coun;
-		}
-		
-		//Create the resourceBundle with the paramaters choose by the user
-		currentLocale = new Locale(language, country);
-		resourceBundle = ResourceBundle.getBundle(PROPERTIES_FILE_NAME, currentLocale);
+	public static void setLanguage(String lang, String count){
+		language = lang;
+		country = count;
+		instanceOfLanguage = new Language();
 	}
 	
 	/**
 	 * Give the resourceBundle to use I18N
 	 * @return The ressourceBundle to use
 	 */
-	public ResourceBundle getResourceBundle(){
+	public static ResourceBundle getResourceBundle(){
+		if(instanceOfLanguage == null){
+			instanceOfLanguage = new Language();
+		}
 		return resourceBundle;
 	}
 
