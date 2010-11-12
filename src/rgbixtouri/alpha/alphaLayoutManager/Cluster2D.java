@@ -6,7 +6,9 @@ import javax.swing.JPanel;
 
 public class Cluster2D extends JPanel{
 	
-	String xAxeName;
+    private static final long serialVersionUID = 2521877046744374462L;
+    
+    String xAxeName;
 	String yAxeName;
 	String clusterName;
 	Color bgColor;

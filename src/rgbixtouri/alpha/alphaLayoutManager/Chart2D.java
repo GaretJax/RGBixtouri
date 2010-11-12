@@ -44,7 +44,7 @@ public class Chart2D extends JPanel implements Observer {
 		pixelsInSkin = new Vector<Point>();
 	}
 
-	public void paintComponent(Graphics g){
+	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		setBackground(bgColor);
 		Graphics2D g2d = (Graphics2D)g;
@@ -120,7 +120,7 @@ public class Chart2D extends JPanel implements Observer {
 	public void update(Observable selection, Object _) {
 		System.out.println("update");
 		ImageModel imageSelection = (ImageModel) selection;
-		AreaCollection wound=imageSelection.getArea(ImageModel.WOUND);
+		AreaCollection wound=imageSelection.getArea(ImageModel.Zone.WOUND);
 		Integer[] woundColors=wound.getColors();
 		
 		pixelsInWound.clear();
@@ -151,7 +151,7 @@ public class Chart2D extends JPanel implements Observer {
 				pixelsInWound.add(new Point(green, blue));
 			}
 		}
-		AreaCollection skin=imageSelection.getArea(ImageModel.SKIN);
+		AreaCollection skin=imageSelection.getArea(ImageModel.Zone.SKIN);
 		Integer[] skinColors=skin.getColors();
 		
 		pixelsInSkin.clear();

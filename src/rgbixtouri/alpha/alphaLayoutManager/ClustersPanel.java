@@ -10,7 +10,9 @@ import com.atticlabs.zonelayout.swing.ZoneLayoutFactory;
 
 public class ClustersPanel extends JPanel implements LanguageUpdate{
 	
-	public ClustersPanel(){
+    private static final long serialVersionUID = -8194417959731419264L;
+
+    public ClustersPanel(){
 		ZoneLayout zLayout = ZoneLayoutFactory.newZoneLayout();
 		zLayout.addRow("a+ab+bc+c");
 		zLayout.addRow("d+......d");

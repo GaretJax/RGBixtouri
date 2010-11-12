@@ -45,7 +45,7 @@ public class Chart3D extends Chart implements Observer{
 	public void update(Observable selection, Object _) {
 		System.out.println("update3d");
 		ImageModel imageSelection = (ImageModel) selection;
-		AreaCollection wound=imageSelection.getArea(ImageModel.WOUND);
+		AreaCollection wound=imageSelection.getArea(ImageModel.Zone.WOUND);
 		Integer[] woundColors=wound.getColors();
 
 		pixels.clear();
@@ -59,7 +59,7 @@ public class Chart3D extends Chart implements Observer{
 			colors.add(Color.RED);
 		}	
 
-		AreaCollection skin=imageSelection.getArea(ImageModel.SKIN);
+		AreaCollection skin=imageSelection.getArea(ImageModel.Zone.SKIN);
 		Integer[] skinColors=skin.getColors();
 		
 		for (int color : skinColors) {
