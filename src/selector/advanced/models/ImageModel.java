@@ -4,10 +4,11 @@ import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.Observable;
+import java.util.Observer;
 
 import rgbixtouri.alpha.alphaLayoutManager.AreaCollection;
 
-public class ImageModel extends Observable {
+public class ImageModel extends Observable implements Observer {
     
     private final BufferedImage image;
     private final double ratio;
@@ -25,6 +26,7 @@ public class ImageModel extends Observable {
         
         for (int i = this.areas.length-1; i>=0; i--) {
             this.areas[i] = new AreaCollection(this);
+            this.areas[i].addObserver(this);
         }
 
     }
@@ -62,5 +64,10 @@ public class ImageModel extends Observable {
         iy = (h - ih) / 2;
 
         return new Rectangle(ix, iy,iw, ih); 
+    }
+
+    @Override
+    public void update(Observable arg0, Object arg1) {
+        this.notifyObservers();
     }
 }

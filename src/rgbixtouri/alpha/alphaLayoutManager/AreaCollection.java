@@ -25,10 +25,12 @@ public class AreaCollection extends Observable {
 
 	public void addArea(Area area){
 		areas.add(area);
+		this.notifyObservers();
 	}
 
 	public void removeArea(Area area){
 		areas.remove(area);
+		this.notifyObservers();
 	}
 
 	public Integer[] getColors(){
