@@ -43,6 +43,12 @@ public class ImagePanel extends JPanel {
     public void setImage(BufferedImage image) {
         this.model = new ImageModel(image);
         
+        if (this.selectionPanel != null) {
+            this.remove(this.selectionPanel);
+        } else {
+            this.remove(this.placeholder);
+        }
+        
         if (image == null) {
             this.selectionPanel = null;
             this.add(this.placeholder, BorderLayout.CENTER);
@@ -50,6 +56,8 @@ public class ImagePanel extends JPanel {
             this.selectionPanel = new SelectionPanel(this.model);
             this.add(this.selectionPanel, BorderLayout.CENTER);
         }
+        
+        this.repaint();
     }
     
     public ImageModel getModel() {
