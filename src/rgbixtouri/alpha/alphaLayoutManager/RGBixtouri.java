@@ -54,13 +54,13 @@ public class RGBixtouri extends JFrame{
 
 		//creation and setting of the panels
 		imagePanel = new ImagePanel();
-		imageSelectorPanel = new ImageLibraryPanel(this);
-		imageSelectorPanel.setPreferredSize(new Dimension(200,200));
 		imagePanel.setPreferredSize(new Dimension(300,300));
 		graphesPanel = new GraphesPanel();
 		graphesPanel.setPreferredSize(new Dimension(300,300));
 		clustersPanel = new ClustersPanel();
 		clustersPanel.setPreferredSize(new Dimension(300,150));
+		imageSelectorPanel = new ImageLibraryPanel(this);
+		imageSelectorPanel.setPreferredSize(new Dimension(200,200));
 
 		this.add(imageSelectorPanel, "B");
 		this.add(imagePanel, "I");
