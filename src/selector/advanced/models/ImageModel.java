@@ -2,27 +2,33 @@ package selector.advanced.models;
 
 import java.awt.Dimension;
 import java.awt.Rectangle;
-import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
 import java.util.Observable;
+import java.util.Observer;
 
 import rgbixtouri.alpha.alphaLayoutManager.AreaCollection;
 
-public class ImageModel extends Observable {
+public class ImageModel extends Observable implements Observer {
     
     private final BufferedImage image;
     private final double ratio;
-    public final static int SKIN = 0;
-    public final static int WOUND = 1;
     
-    private AreaCollection wound;
-    private AreaCollection skin;
+    public static enum Zone {
+        SKIN,
+        WOUND
+    };
+    
+    private AreaCollection[] areas = new AreaCollection[2];
     
     public ImageModel(BufferedImage image) {
         this.image = image;
         this.ratio = image.getWidth() * 1. / image.getHeight();
-        wound=new AreaCollection(this);
-        skin=new AreaCollection(this);
+        
+        for (int i = this.areas.length-1; i>=0; i--) {
+            this.areas[i] = new AreaCollection(this);
+            this.areas[i].addObserver(this);
+        }
+
     }
     
     public BufferedImage getImage() {
@@ -37,15 +43,8 @@ public class ImageModel extends Observable {
         return new Dimension(this.image.getWidth(), this.image.getHeight());
     }
     
-    public AreaCollection getArea(int type) {
-        switch (type) {
-            case SKIN:
-                return this.skin;
-            case WOUND:
-                return this.wound;
-            default:
-                throw new IllegalArgumentException("Invalid area type " + type + ".");
-        }
+    public AreaCollection getArea(ImageModel.Zone area) {
+        return this.areas[area.ordinal()];
     }
     
     public Rectangle getBounds(Dimension maxSize) {
@@ -66,13 +65,9 @@ public class ImageModel extends Observable {
 
         return new Rectangle(ix, iy,iw, ih); 
     }
-    
-    public void addArea(Area a){
-    	wound.addArea(a);
-    	skin.addArea(a);
-    	setChanged();
-    	notifyObservers(this);
-    	System.out.println("Area added");
+
+    @Override
+    public void update(Observable arg0, Object arg1) {
+        this.notifyObservers();
     }
-    
 }

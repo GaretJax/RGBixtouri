@@ -7,13 +7,10 @@ import java.awt.Color;
 
 import javax.swing.JPanel;
 
-import org.jzy3d.chart.Chart;
 import org.jzy3d.chart.controllers.mouse.ChartMouseController;
-import org.jzy3d.plot3d.primitives.Scatter;
 
 import rgbixtouri.alpha.alphaLayoutManager.Chart2D.chartType;
 
-import com.atticlabs.zonelayout.swing.Magnitude;
 import com.atticlabs.zonelayout.swing.ZoneLayout;
 import com.atticlabs.zonelayout.swing.ZoneLayoutFactory;
 

@@ -1,6 +1,5 @@
 package rgbixtouri.alpha.alphaLayoutManager;
 
-import java.awt.Frame;
 
 import javax.swing.JButton;
 import javax.swing.JList;

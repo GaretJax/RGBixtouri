@@ -30,12 +30,24 @@ public class ImagePanel extends JPanel {
         this.add(new ControlPanel(this), BorderLayout.SOUTH);
     }
     
+    public void setMode(SelectionEditor.Mode mode) {
+        if (this.selectionPanel != null) {
+            this.selectionPanel.setMode(mode);
+        }
+    }
+    
     public void setImage(String path) throws IOException {
         this.setImage(ImageIO.read(new File(path)));
     }
     
     public void setImage(BufferedImage image) {
         this.model = new ImageModel(image);
+        
+        if (this.selectionPanel != null) {
+            this.remove(this.selectionPanel);
+        } else {
+            this.remove(this.placeholder);
+        }
         
         if (image == null) {
             this.selectionPanel = null;
@@ -44,6 +56,8 @@ public class ImagePanel extends JPanel {
             this.selectionPanel = new SelectionPanel(this.model);
             this.add(this.selectionPanel, BorderLayout.CENTER);
         }
+        
+        this.repaint();
     }
     
     public ImageModel getModel() {
@@ -55,12 +69,12 @@ public class ImagePanel extends JPanel {
         
         if (this.model != null) {
             Graphics2D g2d = (Graphics2D) g;
-
+            
             int s = 10;
-            int h = this.getHeight(), w = this.getWidth();        
-
+            int h = this.getHeight(), w = this.getWidth();
+            
             g2d.setColor(new Color(204, 204, 204));
-
+            
             for (int x = 0; x < w; x += s) {
                 for (int y = (x % (2 * s)); y < h; y += 2 * s) {
                     g2d.fillRect(x, y, s, s);
