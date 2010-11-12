@@ -43,6 +43,7 @@ public class ImageListListener implements ListSelectionListener {
 					rg.selectedImageChanged(panelToSet.getModel());
 					rb.selectedImageChanged(panelToSet.getModel());
 					gb.selectedImageChanged(panelToSet.getModel());
+					rgb.selectedImageChanged(panelToSet.getModel());
 				}
 			}
 		}
