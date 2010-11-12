@@ -34,6 +34,8 @@ public class SelectedArea extends JComponent implements AncestorListener, FocusL
         this.container = container;
         this.zone = zone;
         
+        this.container.model.getArea(zone).addArea(area);
+        
         this.addAncestorListener(this);
         this.addMouseListener(this);
         this.addFocusListener(this);
