@@ -1,10 +1,8 @@
-package rgbixtouri.alpha.selector;
+package selector.advanced;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Point;
-import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.event.FocusEvent;
@@ -14,71 +12,60 @@ import java.awt.event.MouseListener;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 import java.awt.geom.PathIterator;
-import java.util.Vector;
 
 import javax.swing.JComponent;
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
 
-public class SelectedArea extends JComponent implements AncestorListener, FocusListener, MouseListener {
+
+public class SelectedArea extends JComponent implements AncestorListener, FocusListener, MouseListener  {
     
-    private static final long serialVersionUID = 2245064748787728791L;
+    private final Area area; 
+    private final SelectionPanel container;
     
-    private Vector<Point> points = new Vector<Point>();
+    private boolean focused;
     
-    public SelectedArea(Vector<Point> points) {
-        for (Point p : points) {
-            this.points.add((Point) p.clone());
-        }
+    public SelectedArea(Area area, SelectionPanel container) {
+        this.area = area;
+        this.container = container;
         
         this.addAncestorListener(this);
         this.addMouseListener(this);
         this.addFocusListener(this);
     }
     
-    private Area getArea() {
-        Polygon poly = new Polygon();
-        
-        for (Point p : this.points) {
-            poly.addPoint(p.x, p.y);
-        }
-        
-        return new Area(poly);
-    }
-    
-    private Area getScaledArea() {
-        double ratio = this.getRatio();
-        Rectangle bounds = this.getBounds();
-        
-        AffineTransform at = new AffineTransform();
-        at.translate(-bounds.x, -bounds.y);
-        at.scale(ratio, ratio);
-        
-        return this.getArea().createTransformedArea(at);
-    }
-    
     protected void recalculateBounds() {
-        Area area = this.getArea();
-        double ratio = this.getRatio();
-        int s = ((EditorPanel) this.getParent()).getHandleSize();
+        double ratio = this.container.getDisplayRatio();
+        int s = this.container.getHandleSize();
         
-        AffineTransform at = new AffineTransform();
-        at.scale(ratio, ratio);
+        Rectangle cb = this.container.getImageBounds();
         
-        Rectangle b = area.createTransformedArea(at).getBounds();
+        Rectangle b = this.area.getBounds();
+        b = new Rectangle((int) (b.x * ratio), (int) (b.y * ratio), (int) (b.width * ratio), (int) (b.height * ratio));
         
-        this.setBounds(b.x - s, b.y - s, b.width + 2*s, b.height + 2*s);
+        this.setBounds(cb.x + b.x - s, cb.y + b.y - s, b.width + 2*s, b.height + 2*s);
         this.repaint();
     }
     
-    private double getRatio() {
-        return ((EditorPanel) this.getParent()).getRatio();
+    private Area getScaledArea() {
+        double ratio = this.container.getDisplayRatio();
+        Rectangle bounds = this.getBounds();
+        
+        Rectangle cb = this.container.getImageBounds();
+        
+        AffineTransform at = new AffineTransform();
+        at.translate(-bounds.x + cb.x, -bounds.y + cb.y);
+        at.scale(ratio, ratio);
+        
+        return this.area.createTransformedArea(at);
     }
     
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
             RenderingHints.VALUE_ANTIALIAS_ON);
+        
+        
         
         Area area = this.getScaledArea();
         
@@ -94,7 +81,7 @@ public class SelectedArea extends JComponent implements AncestorListener, FocusL
             
             double[] segment = new double[6];
             
-            int s = ((EditorPanel) this.getParent()).getHandleSize();
+            int s = this.container.getHandleSize();
             
             PathIterator itr = area.getPathIterator(null);
             
@@ -126,8 +113,6 @@ public class SelectedArea extends JComponent implements AncestorListener, FocusL
     
     @Override
     public void ancestorRemoved(AncestorEvent e) {}
-    
-    private boolean focused = false;
     
     @Override
     public void focusGained(FocusEvent e) {

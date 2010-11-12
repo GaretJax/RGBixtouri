@@ -24,13 +24,13 @@ public class ImageLibraryPanel extends JPanel {
 	private JButton imageButton;
 	private JButton folderButton;
 	
-	public Frame mainFrame;
+	public RGBixtouri mainFrame;
 	
 	private ImageLibraryController controler;
 
 	private ImageListModel listModel;
 
-	public ImageLibraryPanel(Frame mainFrame){
+	public ImageLibraryPanel(RGBixtouri mainFrame){
 		this.mainFrame=mainFrame;
 		listModel = new ImageListModel();
 		listModel.addPropertyChangeListener(new ImageLibraryListener(this));
@@ -38,6 +38,11 @@ public class ImageLibraryPanel extends JPanel {
 		imageList = new JList(listModel);
 		imageList.setLayoutOrientation(JList.VERTICAL);
 		imageList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
+		ImageListListener selectionListener = new ImageListListener(mainFrame.imagePanel, listModel, mainFrame.graphesPanel.rgChart,
+				mainFrame.graphesPanel.rbChart, mainFrame.graphesPanel.gbChart, mainFrame.graphesPanel.rgbChart);
+		ListSelectionModel listSelectionModel = imageList.getSelectionModel();
+		listSelectionModel.addListSelectionListener(selectionListener);
 
 		scrollPanel = new JScrollPane(imageList);
 		

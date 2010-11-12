@@ -5,7 +5,7 @@ import java.io.IOException;
 
 import javax.swing.JFrame;
 
-import rgbixtouri.alpha.selector.ImagePanel;
+import selector.advanced.ImagePanel;
 
 import com.atticlabs.zonelayout.swing.ZoneLayout;
 import com.atticlabs.zonelayout.swing.ZoneLayoutFactory;
@@ -20,9 +20,9 @@ public class RGBixtouri extends JFrame{
 	private static final long serialVersionUID = 1L;
 	
 	private ImageLibraryPanel imageSelectorPanel;
-	private rgbixtouri.alpha.selector.ImagePanel imagePanel; 
+	public selector.advanced.ImagePanel imagePanel; 
 	private ParametersPanel parametersPanel;
-	private GraphesPanel graphesPanel;
+	public GraphesPanel graphesPanel;
 	private ClustersPanel clustersPanel;
 
 	/**
@@ -55,14 +55,9 @@ public class RGBixtouri extends JFrame{
 		setMinimumSize(new Dimension(400,300));
 
 		//creation and setting of the panels
+		imagePanel = new ImagePanel();
 		imageSelectorPanel = new ImageLibraryPanel(this);
 		imageSelectorPanel.setPreferredSize(new Dimension(200,200));
-		try {
-			imagePanel = new ImagePanel("assets/wound1.jpg");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		imagePanel.setPreferredSize(new Dimension(300,300));
 		parametersPanel = new ParametersPanel();
 		parametersPanel.setPreferredSize(new Dimension(300,150));
