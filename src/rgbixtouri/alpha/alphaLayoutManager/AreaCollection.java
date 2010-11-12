@@ -25,11 +25,13 @@ public class AreaCollection extends Observable {
 
 	public void addArea(Area area){
 		areas.add(area);
+		setChanged();
 		this.notifyObservers();
 	}
 
 	public void removeArea(Area area){
 		areas.remove(area);
+		setChanged();
 		this.notifyObservers();
 	}
 
