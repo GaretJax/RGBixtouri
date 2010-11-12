@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.Observable;
 
+import rgbixtouri.alpha.alphaLayoutManager.AreaCollection;
 
 public class ImageModel extends Observable {
     
@@ -25,6 +26,7 @@ public class ImageModel extends Observable {
         for (int i = this.areas.length-1; i>=0; i--) {
             this.areas[i] = new AreaCollection(this);
         }
+
     }
     
     public BufferedImage getImage() {
@@ -37,6 +39,10 @@ public class ImageModel extends Observable {
     
     public Dimension getSize() {
         return new Dimension(this.image.getWidth(), this.image.getHeight());
+    }
+    
+    public AreaCollection getArea(ImageModel.Zone area) {
+        return this.areas[area.ordinal()];
     }
     
     public Rectangle getBounds(Dimension maxSize) {
@@ -57,17 +63,4 @@ public class ImageModel extends Observable {
 
         return new Rectangle(ix, iy,iw, ih); 
     }
-    
-    /**
-     * Invoke me as selection.getArea(ImageSelection.SKIN)
-     * 
-     * @todo Consider returning a copy of the AreaCollection.
-     * 
-     * @param type
-     * @return
-     */
-    public AreaCollection getArea(ImageModel.Zone area) {
-        return this.areas[area.ordinal()];
-    }
-    
 }

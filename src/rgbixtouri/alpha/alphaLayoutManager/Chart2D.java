@@ -12,7 +12,6 @@ import java.util.Vector;
 
 import javax.swing.JPanel;
 
-import rgbixtouri.alpha.alphaLayoutManager.ImageSelection;
 import selector.advanced.models.ImageModel;
 
 public class Chart2D extends JPanel implements Observer {
@@ -93,7 +92,7 @@ public class Chart2D extends JPanel implements Observer {
 		g2d.setPaint(Color.RED);
 		for (Point point : pixelsInWound) {
 			p=getPanelCoord(point, new Point((int)xOfXAxe, (int)yOfXAxe));
-			Ellipse2D.Double pixel = new Ellipse2D.Double(p.x-2, p.y-2, 4, 4);
+			Ellipse2D.Double pixel = new Ellipse2D.Double(p.x-2, p.y-2, 1, 1);
 			g2d.fill(pixel);
 			g2d.draw(pixel);
 		}		
@@ -113,15 +112,15 @@ public class Chart2D extends JPanel implements Observer {
 	}
 
 	public void selectedImageChanged(ImageModel is){
-		//TODO
 		is.addObserver(this);
 		update(is, is);
 	}
 
 	@Override 
 	public void update(Observable selection, Object _) {
-		ImageSelection imageSelection = (ImageSelection) selection;
-		AreaCollection wound=imageSelection.getArea(ImageSelection.WOUND);
+		System.out.println("update");
+		ImageModel imageSelection = (ImageModel) selection;
+		AreaCollection wound=imageSelection.getArea(ImageModel.Zone.WOUND);
 		Integer[] woundColors=wound.getColors();
 		
 		pixelsInWound.clear();
@@ -152,7 +151,7 @@ public class Chart2D extends JPanel implements Observer {
 				pixelsInWound.add(new Point(green, blue));
 			}
 		}
-		AreaCollection skin=imageSelection.getArea(ImageSelection.SKIN);
+		AreaCollection skin=imageSelection.getArea(ImageModel.Zone.SKIN);
 		Integer[] skinColors=skin.getColors();
 		
 		pixelsInSkin.clear();
@@ -182,6 +181,6 @@ public class Chart2D extends JPanel implements Observer {
 				pixelsInSkin.add(new Point(green, blue));
 			}
 		}
-		
+	this.repaint();	
 	}
 }

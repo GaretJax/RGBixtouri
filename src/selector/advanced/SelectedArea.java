@@ -17,7 +17,6 @@ import javax.swing.JComponent;
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
 
-import selector.advanced.models.AreaCollection;
 import selector.advanced.models.ImageModel;
 
 
@@ -34,8 +33,6 @@ public class SelectedArea extends JComponent implements AncestorListener, FocusL
         this.area = area;
         this.container = container;
         this.zone = zone;
-        
-        System.out.println("Zone is " + zone.toString());
         
         this.addAncestorListener(this);
         this.addMouseListener(this);

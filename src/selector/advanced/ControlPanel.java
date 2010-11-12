@@ -12,11 +12,11 @@ public class ControlPanel extends JPanel {
     
     /** Generated serialVersionUID */
     private static final long serialVersionUID = 5285220342636108208L;
-
+    
     public ControlPanel(final ImagePanel imgPanel) {
         
-        
-        this.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, new Color(150, 150, 150)));
+        this.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0,
+            new Color(150, 150, 150)));
         
         JButton skin = new JButton("Skin");
         skin.addActionListener(new ActionListener() {

@@ -9,7 +9,7 @@ import org.jzy3d.colors.Color;
 import org.jzy3d.maths.Coord3d;
 import org.jzy3d.plot3d.primitives.Scatter;
 
-import rgbixtouri.alpha.alphaLayoutManager.ImageSelection;
+import selector.advanced.models.ImageModel;
 
 public class Chart3D extends Chart implements Observer{
 	String xAxeName;
@@ -26,7 +26,7 @@ public class Chart3D extends Chart implements Observer{
 		this.zAxeName=zName;
 		pixels=new Vector<Coord3d>();
 		colors=new Vector<Color>();
-		Scatter scatter = new Scatter(); //pixels.toArray(new Coord3d[1]), colors.toArray(new Color[1])
+		Scatter scatter = new Scatter(pixels.toArray(new Coord3d[0]), colors.toArray(new Color[0])); 
 		this.getScene().add(scatter);
 		scatter.setWidth(10);
 		this.getAxeLayout().setXAxeLabel(xAxeName);
@@ -34,11 +34,18 @@ public class Chart3D extends Chart implements Observer{
 		this.getAxeLayout().setZAxeLabel(zAxeName);
 
 	}
+	
+	public void selectedImageChanged(ImageModel is){
+		is.addObserver(this);
+		System.out.println("imageChanged");
+		update(is, is);
+	}
 
 	@Override
-	public void update(Observable o, Object selection) {
-		ImageSelection imageSelection = (ImageSelection) selection;
-		AreaCollection wound=imageSelection.getArea(ImageSelection.WOUND);
+	public void update(Observable selection, Object _) {
+		System.out.println("update3d");
+		ImageModel imageSelection = (ImageModel) selection;
+		AreaCollection wound=imageSelection.getArea(ImageModel.Zone.WOUND);
 		Integer[] woundColors=wound.getColors();
 
 		pixels.clear();
@@ -52,7 +59,7 @@ public class Chart3D extends Chart implements Observer{
 			colors.add(Color.RED);
 		}	
 
-		AreaCollection skin=imageSelection.getArea(ImageSelection.SKIN);
+		AreaCollection skin=imageSelection.getArea(ImageModel.Zone.SKIN);
 		Integer[] skinColors=skin.getColors();
 		
 		for (int color : skinColors) {
@@ -62,5 +69,7 @@ public class Chart3D extends Chart implements Observer{
 			pixels.add(new Coord3d(red, green, blue));
 			colors.add(Color.BLUE);
 		}
+		System.out.println("end update 3d");
+		
 	}
 }

@@ -17,19 +17,16 @@ import java.util.Vector;
 
 import javax.swing.JPanel;
 
-import rgbixtouri.alpha.alphaLayoutManager.ImageSelection;
 import selector.advanced.models.ImageModel;
 
 public class SelectionEditor extends JPanel implements MouseListener, MouseMotionListener {
-
+    
     private static final long serialVersionUID = -5611160066051383215L;
     private final SelectionPanel container;
     private SelectionEditor.Mode mode = SelectionEditor.Mode.SKIN;
     
     public enum Mode {
-        EDITING,
-        WOUND, 
-        SKIN
+        EDITING, WOUND, SKIN
     };
     
     public SelectionEditor(SelectionPanel container) {
@@ -42,11 +39,10 @@ public class SelectionEditor extends JPanel implements MouseListener, MouseMotio
     }
     
     public void setMode(SelectionEditor.Mode mode) {
-        System.out.println("Mode is " + mode.toString());
         this.mode = mode;
     }
     
-    private ImageModel.Zone getZone() {        
+    private ImageModel.Zone getZone() {
         switch (this.mode) {
             case WOUND:
                 return ImageModel.Zone.WOUND;
@@ -70,7 +66,8 @@ public class SelectionEditor extends JPanel implements MouseListener, MouseMotio
         Color handle = SelectedArea.getZoneHandleColor(zone);
         
         Graphics2D g2d = (Graphics2D) g;
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+            RenderingHints.VALUE_ANTIALIAS_ON);
         
         Polygon p1 = new Polygon();
         
@@ -83,13 +80,13 @@ public class SelectionEditor extends JPanel implements MouseListener, MouseMotio
         if (this.currentLocation != null) {
             p1.addPoint(this.currentLocation.x, this.currentLocation.y);
         }
-    
+        
         double ratio = this.container.getDisplayRatio();
         Rectangle b = this.container.getImageBounds();
         
         AffineTransform at = new AffineTransform();
         at.scale(ratio, ratio);
-        at.translate(b.x/ratio, b.y/ratio);
+        at.translate(b.x / ratio, b.y / ratio);
         
         Area s1 = new Area(at.createTransformedShape(p1));
         g2d.setColor(fill);
@@ -120,10 +117,10 @@ public class SelectionEditor extends JPanel implements MouseListener, MouseMotio
                 g2d.drawLine(prev.x, prev.y, p.x, p.y);
                 
                 g2d.setColor(handle);
-                g2d.fillRect(prev.x - s/2, prev.y - s/2, s, s);
+                g2d.fillRect(prev.x - s / 2, prev.y - s / 2, s, s);
                 
                 g2d.setColor(border);
-                g2d.drawRect(prev.x - s/2, prev.y - s/2, s, s);
+                g2d.drawRect(prev.x - s / 2, prev.y - s / 2, s, s);
                 
                 prev = p;
             }
@@ -137,14 +134,14 @@ public class SelectionEditor extends JPanel implements MouseListener, MouseMotio
     /*
      * Selection areas creation code
      */
-    
+
     Vector<Point> areaStub = null;
     Point currentLocation = null;
     
     @Override
     public void mouseClicked(MouseEvent e) {
         this.requestFocusInWindow();
-                
+        
         if (e.getClickCount() == 2) {
             this.container.addArea(this.areaStub, this.getZone());
             this.areaStub = null;
@@ -164,27 +161,32 @@ public class SelectionEditor extends JPanel implements MouseListener, MouseMotio
             p.x /= this.container.getDisplayRatio();
             p.y /= this.container.getDisplayRatio();
             
-            this.areaStub.add(p);               
+            this.areaStub.add(p);
         }
         
         this.repaint();
     }
-
+    
     @Override
-    public void mouseEntered(MouseEvent e) {}
-
+    public void mouseEntered(MouseEvent e) {
+    }
+    
     @Override
-    public void mouseExited(MouseEvent e) {}
-
+    public void mouseExited(MouseEvent e) {
+    }
+    
     @Override
-    public void mousePressed(MouseEvent e) {}
-
+    public void mousePressed(MouseEvent e) {
+    }
+    
     @Override
-    public void mouseReleased(MouseEvent e) {}
-
+    public void mouseReleased(MouseEvent e) {
+    }
+    
     @Override
-    public void mouseDragged(MouseEvent e) {}
-
+    public void mouseDragged(MouseEvent e) {
+    }
+    
     @Override
     public void mouseMoved(MouseEvent e) {
         if (this.areaStub != null) {
@@ -197,7 +199,7 @@ public class SelectionEditor extends JPanel implements MouseListener, MouseMotio
             
             p.x /= this.container.getDisplayRatio();
             p.y /= this.container.getDisplayRatio();
-            this.currentLocation = p;        
+            this.currentLocation = p;
             
             this.repaint();
         }

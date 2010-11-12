@@ -61,12 +61,12 @@ public class ImagePanel extends JPanel {
         
         if (this.model != null) {
             Graphics2D g2d = (Graphics2D) g;
-
+            
             int s = 10;
-            int h = this.getHeight(), w = this.getWidth();        
-
+            int h = this.getHeight(), w = this.getWidth();
+            
             g2d.setColor(new Color(204, 204, 204));
-
+            
             for (int x = 0; x < w; x += s) {
                 for (int y = (x % (2 * s)); y < h; y += 2 * s) {
                     g2d.fillRect(x, y, s, s);
