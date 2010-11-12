@@ -30,6 +30,12 @@ public class ImagePanel extends JPanel {
         this.add(new ControlPanel(this), BorderLayout.SOUTH);
     }
     
+    public void setMode(SelectionEditor.Mode mode) {
+        if (this.selectionPanel != null) {
+            this.selectionPanel.setMode(mode);
+        }
+    }
+    
     public void setImage(String path) throws IOException {
         this.setImage(ImageIO.read(new File(path)));
     }

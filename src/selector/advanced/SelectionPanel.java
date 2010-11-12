@@ -17,8 +17,10 @@ public class SelectionPanel extends JLayeredPane implements ComponentListener {
 
 	private static final long serialVersionUID = 2044905103542084967L;
 
-	public final static Integer EDITOR_LAYER = new Integer(2);
-	public final static Integer AREA_LAYER = new Integer(1);
+	public final static Integer EDITOR_LAYER = new Integer(3);
+	public final static Integer WOUND_LAYER = new Integer(2);
+	public final static Integer SKIN_LAYER = new Integer(1);
+	
 	
 	final ImageModel model;
 	private final SelectionEditor editor;
@@ -44,19 +46,32 @@ public class SelectionPanel extends JLayeredPane implements ComponentListener {
 	    return this.getImageBounds().width * 1. / this.model.getSize().width;
 	}
 	
-	public void addArea(Vector<Point> points) {
+	public void setMode(SelectionEditor.Mode mode) {
+	    this.editor.setMode(mode);
+	}
+	
+	public void addArea(Vector<Point> points, ImageModel.Zone zone) {
 	    Polygon poly = new Polygon();
 	    
 	    for (Point p : points) {
 	        poly.addPoint(p.x, p.y);
 	    }
 	    
-	    this.addArea(new Area(poly));
+	    this.addArea(new Area(poly), zone);
 	}
 	
-	public void addArea(Area area) {
-	    SelectedArea a = new SelectedArea(area, this);
-	    this.add(a, SelectionPanel.AREA_LAYER);
+	public void addArea(Area area, ImageModel.Zone zone) {
+	    Integer layer;
+	    
+	    if (zone == ImageModel.Zone.SKIN) {
+	        layer = SelectionPanel.SKIN_LAYER;
+	    } else {
+	        layer = SelectionPanel.WOUND_LAYER;
+	    }
+	    
+	    SelectedArea a = new SelectedArea(area, zone, this);
+	    this.add(a, layer, 0);
+	    
 	    a.requestFocusInWindow();
 	}
 
@@ -70,7 +85,11 @@ public class SelectionPanel extends JLayeredPane implements ComponentListener {
     public void componentResized(ComponentEvent e) {
         this.editor.setBounds(this.getBounds());
         
-        for (Component area : this.getComponentsInLayer(SelectionPanel.AREA_LAYER)) {
+        for (Component area : this.getComponentsInLayer(SelectionPanel.WOUND_LAYER)) {
+            ((SelectedArea) area).recalculateBounds();
+        }
+        
+        for (Component area : this.getComponentsInLayer(SelectionPanel.SKIN_LAYER)) {
             ((SelectedArea) area).recalculateBounds();
         }
     }

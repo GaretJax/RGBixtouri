@@ -17,10 +17,20 @@ import java.util.Vector;
 
 import javax.swing.JPanel;
 
+import rgbixtouri.alpha.alphaLayoutManager.ImageSelection;
+import selector.advanced.models.ImageModel;
+
 public class SelectionEditor extends JPanel implements MouseListener, MouseMotionListener {
 
     private static final long serialVersionUID = -5611160066051383215L;
     private final SelectionPanel container;
+    private SelectionEditor.Mode mode = SelectionEditor.Mode.SKIN;
+    
+    public enum Mode {
+        EDITING,
+        WOUND, 
+        SKIN
+    };
     
     public SelectionEditor(SelectionPanel container) {
         this.container = container;
@@ -31,9 +41,33 @@ public class SelectionEditor extends JPanel implements MouseListener, MouseMotio
         this.addMouseMotionListener(this);
     }
     
+    public void setMode(SelectionEditor.Mode mode) {
+        System.out.println("Mode is " + mode.toString());
+        this.mode = mode;
+    }
+    
+    private ImageModel.Zone getZone() {        
+        switch (this.mode) {
+            case WOUND:
+                return ImageModel.Zone.WOUND;
+            case SKIN:
+                return ImageModel.Zone.SKIN;
+            case EDITING:
+                return null; // @todo: return zone of currently edited area;
+        }
+        
+        return null;
+    }
+    
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        
+        ImageModel.Zone zone = this.getZone();
+        
+        Color fill = SelectedArea.getZoneFillColor(zone);
+        Color border = SelectedArea.getZoneBorderColor(zone);
+        Color handle = SelectedArea.getZoneHandleColor(zone);
         
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -58,12 +92,12 @@ public class SelectionEditor extends JPanel implements MouseListener, MouseMotio
         at.translate(b.x/ratio, b.y/ratio);
         
         Area s1 = new Area(at.createTransformedShape(p1));
-        g2d.setColor(new Color(0, 78, 255, 64));
+        g2d.setColor(fill);
         g2d.fill(s1);
         
         int s = this.container.getHandleSize();
         
-        g2d.setColor(new Color(0, 54, 176));
+        g2d.setColor(border);
         
         if (this.areaStub != null) {
             Point prev = (Point) this.areaStub.get(0).clone();
@@ -85,10 +119,10 @@ public class SelectionEditor extends JPanel implements MouseListener, MouseMotio
                 
                 g2d.drawLine(prev.x, prev.y, p.x, p.y);
                 
-                g2d.setColor(new Color(185, 200, 234));
+                g2d.setColor(handle);
                 g2d.fillRect(prev.x - s/2, prev.y - s/2, s, s);
                 
-                g2d.setColor(new Color(0, 54, 176));
+                g2d.setColor(border);
                 g2d.drawRect(prev.x - s/2, prev.y - s/2, s, s);
                 
                 prev = p;
@@ -110,9 +144,9 @@ public class SelectionEditor extends JPanel implements MouseListener, MouseMotio
     @Override
     public void mouseClicked(MouseEvent e) {
         this.requestFocusInWindow();
-        
+                
         if (e.getClickCount() == 2) {
-            this.container.addArea(this.areaStub);
+            this.container.addArea(this.areaStub, this.getZone());
             this.areaStub = null;
             this.currentLocation = null;
         } else {

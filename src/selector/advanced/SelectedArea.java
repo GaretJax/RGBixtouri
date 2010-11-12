@@ -17,18 +17,25 @@ import javax.swing.JComponent;
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
 
+import selector.advanced.models.AreaCollection;
+import selector.advanced.models.ImageModel;
+
 
 public class SelectedArea extends JComponent implements AncestorListener, FocusListener, MouseListener  {
     
     private static final long serialVersionUID = 1193609448831953910L;
     private final Area area; 
+    private final ImageModel.Zone zone;
     private final SelectionPanel container;
     
     private boolean focused;
     
-    public SelectedArea(Area area, SelectionPanel container) {
+    public SelectedArea(Area area, ImageModel.Zone zone, SelectionPanel container) {
         this.area = area;
         this.container = container;
+        this.zone = zone;
+        
+        System.out.println("Zone is " + zone.toString());
         
         this.addAncestorListener(this);
         this.addMouseListener(this);
@@ -61,20 +68,55 @@ public class SelectedArea extends JComponent implements AncestorListener, FocusL
         return this.area.createTransformedArea(at);
     }
     
+    public static Color getZoneFillColor(ImageModel.Zone zone) {
+        switch (zone) {
+            case SKIN:
+                return new Color(0, 78, 255, 64);
+            case WOUND:
+                return new Color(255, 35, 20, 80);
+        }
+        
+        return null;
+    }
+    
+    public static Color getZoneBorderColor(ImageModel.Zone zone) {
+        switch (zone) {
+            case SKIN:
+                return new Color(0, 54, 176);
+            case WOUND:
+                return new Color(255, 35, 20);
+        }
+        
+        return null;
+    }
+    
+    public static Color getZoneHandleColor(ImageModel.Zone zone) {
+        switch (zone) {
+            case SKIN:
+                return new Color(185, 200, 234);
+            case WOUND:
+                return new Color(255, 170, 170);
+        }
+        
+        return null;
+    }
+    
     public void paintComponent(Graphics g) {
+        Color fill = SelectedArea.getZoneFillColor(this.zone);
+        Color border = SelectedArea.getZoneBorderColor(this.zone);
+        Color handle = SelectedArea.getZoneHandleColor(this.zone);
+        
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
             RenderingHints.VALUE_ANTIALIAS_ON);
         
-        
-        
         Area area = this.getScaledArea();
         
-        g2d.setColor(new Color(0, 54, 176));
-        g2d.draw(area);
-        
-        g2d.setColor(new Color(0, 78, 255, 64));
+        g2d.setColor(fill);
         g2d.fill(area);
+        
+        g2d.setColor(border);
+        g2d.draw(area);
         
         if (this.focused) {
             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
@@ -89,11 +131,11 @@ public class SelectedArea extends JComponent implements AncestorListener, FocusL
             while (!itr.isDone()) {
                 int r = itr.currentSegment(segment);
                 if (r == PathIterator.SEG_LINETO || r == PathIterator.SEG_MOVETO) {
-                    g2d.setColor(new Color(185, 200, 234));
+                    g2d.setColor(handle);
                     g2d.fillRect((int) segment[0] - s / 2, (int) segment[1] - s / 2,
                         s, s);
                     
-                    g2d.setColor(new Color(0, 54, 176));
+                    g2d.setColor(border);
                     g2d.drawRect((int) segment[0] - s / 2, (int) segment[1] - s / 2,
                         s, s);
                 }

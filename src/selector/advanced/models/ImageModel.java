@@ -5,14 +5,26 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.Observable;
 
+
 public class ImageModel extends Observable {
     
     private final BufferedImage image;
     private final double ratio;
     
+    public static enum Zone {
+        SKIN,
+        WOUND
+    };
+    
+    private AreaCollection[] areas = new AreaCollection[2];
+    
     public ImageModel(BufferedImage image) {
         this.image = image;
         this.ratio = image.getWidth() * 1. / image.getHeight();
+        
+        for (int i = this.areas.length-1; i>=0; i--) {
+            this.areas[i] = new AreaCollection(this);
+        }
     }
     
     public BufferedImage getImage() {
@@ -44,6 +56,18 @@ public class ImageModel extends Observable {
         iy = (h - ih) / 2;
 
         return new Rectangle(ix, iy,iw, ih); 
+    }
+    
+    /**
+     * Invoke me as selection.getArea(ImageSelection.SKIN)
+     * 
+     * @todo Consider returning a copy of the AreaCollection.
+     * 
+     * @param type
+     * @return
+     */
+    public AreaCollection getArea(ImageModel.Zone area) {
+        return this.areas[area.ordinal()];
     }
     
 }
