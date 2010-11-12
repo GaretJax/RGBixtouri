@@ -57,6 +57,7 @@ public class GraphesPanel extends JPanel{
 		JPanel rgbSlot = new JPanel(new BorderLayout());
 		rgbSlot.add((Component) rgbChart.getCanvas());
 		this.add(rgbSlot, "d");
+//		this.add(rgbChart, "d");
 		ChartMouseController mouse = new ChartMouseController();
 		rgbChart.addController(mouse);
 	}

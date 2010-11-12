@@ -14,8 +14,8 @@ public class ImageSelection extends Observable {
     private AreaCollection skin;
     
     public ImageSelection()  {
-        this.skin = new AreaCollection(this);
-        this.wound = new AreaCollection(this);
+        this.skin = new AreaCollection(null);
+        this.wound = new AreaCollection(null);
     }
     
     public BufferedImage getImage() {
