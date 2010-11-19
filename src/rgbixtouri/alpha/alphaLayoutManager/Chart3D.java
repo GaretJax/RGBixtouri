@@ -16,7 +16,7 @@ public class Chart3D extends Chart implements Observer{
 	String yAxeName;
 	String zAxeName;
 	String chartName;
-
+	Scatter scatter;
 	private Vector<Coord3d> pixels;
 	private Vector<Color> colors;
 
@@ -26,13 +26,12 @@ public class Chart3D extends Chart implements Observer{
 		this.zAxeName=zName;
 		pixels=new Vector<Coord3d>();
 		colors=new Vector<Color>();
-		Scatter scatter = new Scatter(pixels.toArray(new Coord3d[0]), colors.toArray(new Color[0])); 
+		scatter = new Scatter(pixels.toArray(new Coord3d[0]), colors.toArray(new Color[0])); 
 		this.getScene().add(scatter);
-		scatter.setWidth(10);
+		scatter.setWidth(1);
 		this.getAxeLayout().setXAxeLabel(xAxeName);
 		this.getAxeLayout().setYAxeLabel(yAxeName);
 		this.getAxeLayout().setZAxeLabel(zAxeName);
-
 	}
 	
 	public void selectedImageChanged(ImageModel is){
@@ -43,13 +42,15 @@ public class Chart3D extends Chart implements Observer{
 
 	@Override
 	public void update(Observable selection, Object _) {
+		this.getScene().remove(scatter);
 		System.out.println("update3d");
 		ImageModel imageSelection = (ImageModel) selection;
 		AreaCollection wound=imageSelection.getArea(ImageModel.Zone.WOUND);
 		Integer[] woundColors=wound.getColors();
 
 		pixels.clear();
-
+		colors.clear();
+		
 		double red, green, blue;
 		for (int color : woundColors) {
 			red=(color & 0xff0000)>>16;
@@ -70,6 +71,11 @@ public class Chart3D extends Chart implements Observer{
 			colors.add(Color.BLUE);
 		}
 		System.out.println("end update 3d");
+		scatter.setData(pixels.toArray(new Coord3d[0]));
+		scatter.setColors(colors.toArray(new Color[0]));
 		
+		this.getScene().add(scatter);
+		
+		this.render();
 	}
 }
