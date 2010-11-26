@@ -42,10 +42,11 @@ public class Language {
 	 * @param lang Languague to set
 	 * @param count Country to set
 	 */
-	public static void setLanguage(String lang, String count){
+	public static ResourceBundle setLanguage(String lang, String count){
 		language = lang;
 		country = count;
 		instanceOfLanguage = new Language();
+		return resourceBundle;
 	}
 	
 	/**
