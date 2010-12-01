@@ -29,6 +29,7 @@ public class ProgressDialog extends JDialog implements PropertyChangeListener{
 	File folder;
 
 	public ProgressDialog(Frame parentFrame, ImageListModel model, File folder){
+		this.setModal(true);
 		dpb = new JProgressBar(0, 100);
 		jl = new JLabel("Progression: ");
 		this.listModel=model;
@@ -37,10 +38,10 @@ public class ProgressDialog extends JDialog implements PropertyChangeListener{
 		add(BorderLayout.NORTH, jl);
 		setSize(300, 75);
 		setLocationRelativeTo(parentFrame);
-		setVisible(true);
 		task=new LoadTask();
 		task.addPropertyChangeListener(this);
 		task.execute();
+		setVisible(true);
 	}
 	
 	public void setValue(int progress){
@@ -64,6 +65,7 @@ public class ProgressDialog extends JDialog implements PropertyChangeListener{
 			int counter=0;
 			for (String imageName : imagesList) {
 				listModel.addImage(folder.getAbsolutePath()+"\\"+imageName);
+				System.out.println("...");
 				setProgress(++counter*100/imagesList.length);
 			}
 			return null;
