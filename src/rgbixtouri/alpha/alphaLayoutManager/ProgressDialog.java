@@ -109,7 +109,7 @@ public class ProgressDialog extends JDialog implements PropertyChangeListener, L
 
 	@Override
 	public void updateLanguage(ResourceBundle resourceBundle) {
-		// TODO Auto-generated method stub
+		jl.setText(resourceBundle.getString("progressdialog.name.progression.msg"));
 		
 	}
 
