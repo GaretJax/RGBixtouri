@@ -56,8 +56,8 @@ public class ImagePanel extends JPanel {
             this.selectionPanel = new SelectionPanel(this.model);
             this.add(this.selectionPanel, BorderLayout.CENTER);
         }
+        this.revalidate();
         
-        this.repaint();
     }
     
     public ImageModel getModel() {

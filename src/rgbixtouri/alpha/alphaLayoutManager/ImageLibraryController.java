@@ -72,6 +72,7 @@ public class ImageLibraryController implements ActionListener {
 				}
 			}
 		}
+		
 	}
 
 	class ImageFilter extends FileFilter{
