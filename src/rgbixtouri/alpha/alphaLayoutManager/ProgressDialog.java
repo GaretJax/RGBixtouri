@@ -6,18 +6,21 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.FilenameFilter;
+import java.util.ResourceBundle;
 
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 import javax.swing.SwingWorker;
 
+import rgbixtouri.alpha.language.Language;
+
 
 /** 
  * ProgressDialog: dialog with progress bar. A task is simulated by
  * using a timer.
  */
-public class ProgressDialog extends JDialog implements PropertyChangeListener{
+public class ProgressDialog extends JDialog implements PropertyChangeListener, LanguageUpdate{
 
 	private static final long serialVersionUID = 1L;
 
@@ -31,7 +34,7 @@ public class ProgressDialog extends JDialog implements PropertyChangeListener{
 	public ProgressDialog(Frame parentFrame, ImageListModel model, File folder){
 		this.setModal(true);
 		dpb = new JProgressBar(0, 100);
-		jl = new JLabel("Progression: ");
+		jl = new JLabel(Language.getResourceBundle().getString("progressdialog.name.progression.msg"));
 		this.listModel=model;
 		this.folder=folder;
 		add(BorderLayout.CENTER, dpb);
@@ -42,6 +45,10 @@ public class ProgressDialog extends JDialog implements PropertyChangeListener{
 		task.addPropertyChangeListener(this);
 		task.execute();
 		setVisible(true);
+		
+		LanguageUpdater lu = LanguageUpdater.getInstanceOfLanguageUpdater();
+		lu.addObject(this);
+		
 	}
 	
 	public void setValue(int progress){
@@ -98,6 +105,12 @@ public class ProgressDialog extends JDialog implements PropertyChangeListener{
 			}
 			return false;
 		}
+	}
+
+	@Override
+	public void updateLanguage(ResourceBundle resourceBundle) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

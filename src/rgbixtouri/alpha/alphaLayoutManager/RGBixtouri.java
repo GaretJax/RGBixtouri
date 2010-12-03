@@ -57,14 +57,14 @@ public class RGBixtouri extends JFrame implements LanguageUpdate{
 
 		// Zone layout is the layout manager used
 		ZoneLayout zLayout = ZoneLayoutFactory.newZoneLayout();
-		zLayout.addRow("B+I+.G+G");
-		zLayout.addRow(".B..IC+C");
+		zLayout.addRow("B+I+.G+.");
+		zLayout.addRow(".B..I..G");
 		zLayout.compile();
 
 		zLayout.getZone("B").setTake(0, 100);
 		zLayout.getZone("I").setTake(100, 90);
 		zLayout.getZone("G").setTake(100, 90);
-		zLayout.getZone("C").setTake(100, 10);
+		//zLayout.getZone("C").setTake(100, 10);
 		this.setLayout(zLayout);
 
 		setSize(new Dimension(800, 600));
@@ -86,7 +86,7 @@ public class RGBixtouri extends JFrame implements LanguageUpdate{
 		this.add(imageSelectorPanel, "B");
 		this.add(imagePanel, "I");
 		this.add(graphesPanel, "G");
-		this.add(clustersPanel, "C");
+		//this.add(clustersPanel, "C");
 		
 
 	}
