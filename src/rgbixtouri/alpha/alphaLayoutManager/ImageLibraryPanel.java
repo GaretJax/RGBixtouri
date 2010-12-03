@@ -1,11 +1,15 @@
 package rgbixtouri.alpha.alphaLayoutManager;
 
 
+import java.util.ResourceBundle;
+
 import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
+
+import rgbixtouri.alpha.language.Language;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -15,7 +19,7 @@ import net.miginfocom.swing.MigLayout;
  * Panel where user select the image to treat
  * The user can select an image or a folder to show in panel. 
  */
-public class ImageLibraryPanel extends JPanel {
+public class ImageLibraryPanel extends JPanel implements LanguageUpdate {
 	private static final long serialVersionUID = 1L;
 
 	private JScrollPane scrollPanel;
@@ -47,10 +51,10 @@ public class ImageLibraryPanel extends JPanel {
 		
 		controler = new ImageLibraryController(this, listModel);
 		
-		imageButton = new JButton("Image");
+		imageButton = new JButton(Language.getResourceBundle().getString("imagelibrarypanel.button.image.msg"));
 		imageButton.setActionCommand("image");
 		imageButton.addActionListener(controler);
-		folderButton = new JButton("Folder");
+		folderButton = new JButton(Language.getResourceBundle().getString("imagelibrarypanel.button.folder.msg"));
 		folderButton.setActionCommand("folder");
 		folderButton.addActionListener(controler);
 
@@ -60,5 +64,14 @@ public class ImageLibraryPanel extends JPanel {
 		this.add(scrollPanel, "dock center");
 		this.add(folderButton, "dock south");
 		this.add(imageButton, "dock south");
+		
+		LanguageUpdater lu = LanguageUpdater.getInstanceOfLanguageUpdater();
+		lu.addObject(this);
+	}
+
+	@Override
+	public void updateLanguage(ResourceBundle resourceBundle) {
+		imageButton.setText(resourceBundle.getString("imagelibrarypanel.button.image.msg"));
+		folderButton.setText(resourceBundle.getString("imagelibrarypanel.button.folder.msg"));
 	}
 }

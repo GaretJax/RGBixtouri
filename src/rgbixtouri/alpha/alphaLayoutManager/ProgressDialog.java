@@ -34,7 +34,7 @@ public class ProgressDialog extends JDialog implements PropertyChangeListener, L
 	public ProgressDialog(Frame parentFrame, ImageListModel model, File folder){
 		this.setModal(true);
 		dpb = new JProgressBar(0, 100);
-		jl = new JLabel(Language.getResourceBundle().getString("progressdialog.name.progression.msg"));
+		jl = new JLabel(Language.getResourceBundle().getString("progressdialog.label.progression.msg"));
 		this.listModel=model;
 		this.folder=folder;
 		add(BorderLayout.CENTER, dpb);
@@ -109,7 +109,7 @@ public class ProgressDialog extends JDialog implements PropertyChangeListener, L
 
 	@Override
 	public void updateLanguage(ResourceBundle resourceBundle) {
-		jl.setText(resourceBundle.getString("progressdialog.name.progression.msg"));
+		jl.setText(resourceBundle.getString("progressdialog.label.progression.msg"));
 		
 	}
 
