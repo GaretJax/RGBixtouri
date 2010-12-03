@@ -181,6 +181,6 @@ public class Chart2D extends JPanel implements Observer {
 				pixelsInSkin.add(new Point(green, blue));
 			}
 		}
-	this.repaint();	
+	this.repaint();
 	}
 }
