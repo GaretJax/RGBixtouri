@@ -28,7 +28,7 @@ public class ImageLibraryController implements ActionListener {
 		String source = e.getActionCommand();
 		// Image chooser
 		if (source.equals("image")) {
-			JFileChooser fc = new JFileChooser();
+			JFileChooser fc = new JFileChooser("C:/Users/Stéphane/Documents/My Dropbox/ProjetSemestreIWound/Photos/plaies");
 			fc.addChoosableFileFilter(new ImageFilter());
 			int action = fc.showOpenDialog(parent);      
 
