@@ -2,6 +2,7 @@ package rgbixtouri.alpha.alphaLayoutManager;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Dimension;
 
 import java.awt.Color;
 
@@ -54,9 +55,11 @@ public class GraphesPanel extends JPanel{
 		JPanel rgbSlot = new JPanel(new BorderLayout());
 		rgbSlot.add((Component) rgbChart.getCanvas());
 		this.add(rgbSlot, "d");
+		rgbSlot.setMaximumSize(new Dimension(rgbSlot.getWidth(), rgbSlot.getHeight()));
 //		this.add(rgbChart, "d");
 		ChartMouseController mouse = new ChartMouseController();
 		rgbChart.addController(mouse);
+		this.addComponentListener(new RgbComponentListener(rgbChart));
 	}
 	
 }

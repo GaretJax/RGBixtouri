@@ -32,6 +32,8 @@ public class Chart3D extends Chart implements Observer{
 		this.getAxeLayout().setXAxeLabel(xAxeName);
 		this.getAxeLayout().setYAxeLabel(yAxeName);
 		this.getAxeLayout().setZAxeLabel(zAxeName);
+		this.getView().getCamera().setScreenGridDisplayed(true);
+		this.getView().getCamera().setStretchToFill(true);
 	}
 	
 	public void selectedImageChanged(ImageModel is){
