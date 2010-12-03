@@ -99,7 +99,7 @@ public class Chart2D extends JPanel implements Observer {
 		g2d.setPaint(Color.BLUE);
 		for (Point point : pixelsInSkin) {
 			p=getPanelCoord(point, new Point((int)xOfXAxe, (int)yOfXAxe));
-			Ellipse2D.Double pixel = new Ellipse2D.Double(p.x-2, p.y-2, 4, 4);
+			Ellipse2D.Double pixel = new Ellipse2D.Double(p.x-2, p.y-2, 1, 1);
 			g2d.fill(pixel);
 			g2d.draw(pixel);
 		}
