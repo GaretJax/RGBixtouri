@@ -35,18 +35,21 @@ public class Chart3D extends Chart implements Observer{
 		this.getView().setMaximized(false);
 		this.getCanvas().getView().setMaximized(false);
 		this.getView().getCamera().setStretchToFill(false);
+		
 	}
+	
+	
 	
 	public void selectedImageChanged(ImageModel is){
 		is.addObserver(this);
-		System.out.println("imageChanged");
+		//System.out.println("imageChanged");
 		update(is, is);
 	}
 
 	@Override
 	public void update(Observable selection, Object _) {
 		this.getScene().remove(scatter);
-		System.out.println("update3d");
+		//System.out.println("update3d");
 		ImageModel imageSelection = (ImageModel) selection;
 		AreaCollection wound=imageSelection.getArea(ImageModel.Zone.WOUND);
 		Integer[] woundColors=wound.getColors();
@@ -73,12 +76,13 @@ public class Chart3D extends Chart implements Observer{
 			pixels.add(new Coord3d(red, green, blue));
 			colors.add(Color.BLUE);
 		}
-		System.out.println("end update 3d");
+		//System.out.println("end update 3d");
 		scatter.setData(pixels.toArray(new Coord3d[0]));
 		scatter.setColors(colors.toArray(new Color[0]));
 		
 		this.getScene().add(scatter);
 		
 		this.render();
+		
 	}
 }

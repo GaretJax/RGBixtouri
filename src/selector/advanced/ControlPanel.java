@@ -3,13 +3,21 @@ package selector.advanced;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ResourceBundle;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-public class ControlPanel extends JPanel {
-    
+import rgbixtouri.alpha.alphaLayoutManager.LanguageUpdate;
+import rgbixtouri.alpha.alphaLayoutManager.LanguageUpdater;
+import rgbixtouri.alpha.language.Language;
+
+public class ControlPanel extends JPanel implements LanguageUpdate{
+    private JButton skin;
+    private JButton wound;
+    private JButton modify;
+	
     /** Generated serialVersionUID */
     private static final long serialVersionUID = 5285220342636108208L;
     
@@ -18,7 +26,7 @@ public class ControlPanel extends JPanel {
         this.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0,
             new Color(150, 150, 150)));
         
-        JButton skin = new JButton("Skin");
+        skin = new JButton(Language.getResourceBundle().getString("controlpanel.button.skin.msg"));
         skin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
@@ -26,7 +34,7 @@ public class ControlPanel extends JPanel {
             }
         });
         
-        JButton wound = new JButton("Wound");
+        wound = new JButton(Language.getResourceBundle().getString("controlpanel.button.wound.msg"));
         wound.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
@@ -34,9 +42,20 @@ public class ControlPanel extends JPanel {
             }
         });
         
-        this.add(new JButton("Modify"));
+        modify = new JButton(Language.getResourceBundle().getString("controlpanel.button.modify.msg"));
+        this.add(modify);
         this.add(skin);
         this.add(wound);
+        
+        LanguageUpdater lu = LanguageUpdater.getInstanceOfLanguageUpdater();
+        lu.addObject(this);
     }
+
+	@Override
+	public void updateLanguage(ResourceBundle resourceBundle) {
+		modify.setText(resourceBundle.getString("controlpanel.button.modify.msg"));
+		wound.setText(resourceBundle.getString("controlpanel.button.wound.msg"));
+		skin.setText(resourceBundle.getString("controlpanel.button.skin.msg"));
+	}
     
 }

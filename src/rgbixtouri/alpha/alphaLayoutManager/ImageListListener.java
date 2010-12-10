@@ -33,7 +33,7 @@ public class ImageListListener implements ListSelectionListener {
 			for (int i = minIndex; i <= maxIndex; i++) {
 				if (lsm.isSelectedIndex(i)) {
 					imagePath=imageLibrary.getImagePathAt(i);
-					System.out.println(imagePath + "is selected");
+					//System.out.println(imagePath + "is selected");
 					try {
 						panelToSet.setImage(imagePath);
 					} catch (IOException e1) {

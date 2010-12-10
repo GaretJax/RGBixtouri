@@ -37,7 +37,7 @@ public class ImageListModel extends AbstractListModel{
 		imageList.add(new ImageIcon(image));
 		imagePath.add(filename);
 		pcs.firePropertyChange("imageList", this.getSize()-1, this.getSize());
-		System.out.println("add "+filename);
+		//System.out.println("add "+filename);
 	}
 	
 	public void emptyImage(){

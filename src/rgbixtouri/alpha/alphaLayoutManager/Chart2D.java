@@ -118,7 +118,7 @@ public class Chart2D extends JPanel implements Observer {
 
 	@Override 
 	public void update(Observable selection, Object _) {
-		System.out.println("update");
+		//System.out.println("update");
 		ImageModel imageSelection = (ImageModel) selection;
 		AreaCollection wound=imageSelection.getArea(ImageModel.Zone.WOUND);
 		Integer[] woundColors=wound.getColors();

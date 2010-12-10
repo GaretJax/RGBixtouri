@@ -61,4 +61,5 @@ public class GraphesPanel extends JPanel{
 		rgbChart.addController(mouse);
 	}
 	
+	
 }
