@@ -14,6 +14,7 @@ import javax.swing.filechooser.FileFilter;
 import business.Utils;
 
 
+import language.Language;
 import model.ImageListModel;
 
 /**
@@ -36,6 +37,7 @@ public class ImageLibraryController implements ActionListener {
 		String source = e.getActionCommand();
 		// Image chooser
 		if (source.equals("image")) {
+			//TODO change file chooser location
 			JFileChooser fc = new JFileChooser("C:/Users/Stéphane/Documents/My Dropbox/ProjetSemestreIWound/Photos/plaies");
 			fc.addChoosableFileFilter(new ImageFilter());
 			int action = fc.showOpenDialog(parent);      
@@ -44,8 +46,8 @@ public class ImageLibraryController implements ActionListener {
 				String filename = fc.getSelectedFile().getAbsolutePath();
 				File f = new File(filename);
 				if(!f.exists()){    
-					String errorMessage="Le fichier n'est pas existant ("+filename+")";
-					JOptionPane.showMessageDialog(parent, errorMessage, "Problem", JOptionPane.ERROR_MESSAGE);
+					String errorMessage="" + Language.getResourceBundle().getString("imagelibrarycontroller.message.file.err") + " ("+filename+")";
+					JOptionPane.showMessageDialog(parent, errorMessage, "Error", JOptionPane.ERROR_MESSAGE);
 				}
 
 				String extension = Utils.getExtension(f);
@@ -57,9 +59,9 @@ public class ImageLibraryController implements ActionListener {
 							extension.equals(Utils.jpg) ||
 							extension.equals(Utils.bmp) ||
 							extension.equals(Utils.png))) {
-						String errorMessage="Le fichier choisi n'est pas pris en charge." +
-						" Fichiers pris en charge: tiff, tif, gif, jpeg, jpg, bmp, png";
-						JOptionPane.showMessageDialog(parent, errorMessage, "Problem", JOptionPane.ERROR_MESSAGE);
+						String errorMessage=Language.getResourceBundle().getString("imagelibrarycontroller.message.extension.err") +
+						" (tiff, tif, gif, jpeg, jpg, bmp, png)";
+						JOptionPane.showMessageDialog(parent, errorMessage, "Error", JOptionPane.ERROR_MESSAGE);
 					} 
 				}
 				listModel.emptyAndAddImage(filename);
@@ -75,7 +77,7 @@ public class ImageLibraryController implements ActionListener {
 					//folder loading		
 					progressDialog=new ProgressDialog(parent.mainFrame, listModel, f);
 				} else{
-					String errorMessage="Le dossier choisi n'est pas existant ("+f+")";
+					String errorMessage="" + Language.getResourceBundle().getString("imagelibrarycontroller.message.folder.err")  + " ("+f+")";
 					JOptionPane.showMessageDialog(parent, errorMessage, "Problem", JOptionPane.ERROR_MESSAGE);
 				}
 			}
