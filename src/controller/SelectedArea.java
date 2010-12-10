@@ -1,4 +1,6 @@
-package selector.advanced;
+package controller;
+
+import gui.SelectionPanel;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -17,7 +19,8 @@ import javax.swing.JComponent;
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
 
-import selector.advanced.models.ImageModel;
+import model.ImageModel;
+
 
 
 public class SelectedArea extends JComponent implements AncestorListener, FocusListener, MouseListener  {

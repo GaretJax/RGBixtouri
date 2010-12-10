@@ -1,4 +1,6 @@
-package selector.advanced;
+package controller;
+
+import gui.SelectionPanel;
 
 import java.awt.Color;
 import java.awt.Cursor;
@@ -17,7 +19,8 @@ import java.util.Vector;
 
 import javax.swing.JPanel;
 
-import selector.advanced.models.ImageModel;
+import model.ImageModel;
+
 
 public class SelectionEditor extends JPanel implements MouseListener, MouseMotionListener {
     

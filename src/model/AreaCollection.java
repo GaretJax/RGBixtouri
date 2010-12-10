@@ -10,7 +10,6 @@ import java.util.Queue;
 import java.util.Set;
 import java.util.Vector;
 
-import selector.advanced.models.ImageModel;
 
 public class AreaCollection extends Observable {
 	Vector<Area> areas;

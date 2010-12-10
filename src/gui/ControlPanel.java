@@ -1,4 +1,4 @@
-package selector.advanced;
+package gui;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -9,9 +9,14 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import rgbixtouri.alpha.alphaLayoutManager.LanguageUpdate;
-import rgbixtouri.alpha.alphaLayoutManager.LanguageUpdater;
-import rgbixtouri.alpha.language.Language;
+import controller.SelectionEditor;
+import controller.SelectionEditor.Mode;
+
+
+import language.Language;
+import language.LanguageUpdate;
+import language.LanguageUpdater;
+
 
 public class ControlPanel extends JPanel implements LanguageUpdate{
     private JButton skin;

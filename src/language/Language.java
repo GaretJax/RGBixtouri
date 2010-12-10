@@ -1,4 +1,4 @@
-package rgbixtouri.alpha.language;
+package language;
 
 import java.util.Locale;
 import java.util.ResourceBundle;

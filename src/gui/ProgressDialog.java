@@ -13,11 +13,13 @@ import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 import javax.swing.SwingWorker;
 
-import rgbixtouri.alpha.alphaLayoutManager.ImageListModel;
-import rgbixtouri.alpha.alphaLayoutManager.LanguageUpdate;
-import rgbixtouri.alpha.alphaLayoutManager.LanguageUpdater;
-import rgbixtouri.alpha.alphaLayoutManager.Utils;
-import rgbixtouri.alpha.language.Language;
+import business.Utils;
+
+import language.Language;
+import language.LanguageUpdate;
+import language.LanguageUpdater;
+import model.ImageListModel;
+
 
 
 /** 

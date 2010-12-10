@@ -1,4 +1,6 @@
-package rgbixtouri.alpha.alphaLayoutManager;
+package controller;
+
+import gui.ImageLibraryPanel;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;

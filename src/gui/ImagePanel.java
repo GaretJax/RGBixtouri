@@ -1,4 +1,5 @@
-package selector.advanced;
+package gui;
+
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -12,7 +13,11 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-import selector.advanced.models.ImageModel;
+import model.ImageModel;
+
+import controller.SelectionEditor;
+import controller.SelectionEditor.Mode;
+
 
 public class ImagePanel extends JPanel {
     

@@ -12,8 +12,9 @@ import java.util.Vector;
 
 import javax.swing.JPanel;
 
-import rgbixtouri.alpha.alphaLayoutManager.AreaCollection;
-import selector.advanced.models.ImageModel;
+import model.AreaCollection;
+import model.ImageModel;
+
 
 public class Chart2D extends JPanel implements Observer {
 	private static final long serialVersionUID = 1L;

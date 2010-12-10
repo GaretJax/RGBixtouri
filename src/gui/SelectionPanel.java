@@ -1,4 +1,4 @@
-package selector.advanced;
+package gui;
 
 import java.awt.Component;
 import java.awt.Point;
@@ -11,7 +11,12 @@ import java.util.Vector;
 
 import javax.swing.JLayeredPane;
 
-import selector.advanced.models.ImageModel;
+import model.ImageModel;
+
+import controller.SelectedArea;
+import controller.SelectionEditor;
+import controller.SelectionEditor.Mode;
+
 
 public class SelectionPanel extends JLayeredPane implements ComponentListener {
     

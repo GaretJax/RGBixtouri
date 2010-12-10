@@ -9,15 +9,16 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 
-import rgbixtouri.alpha.alphaLayoutManager.ImageLibraryController;
-import rgbixtouri.alpha.alphaLayoutManager.ImageLibraryListener;
-import rgbixtouri.alpha.alphaLayoutManager.ImageListListener;
-import rgbixtouri.alpha.alphaLayoutManager.ImageListModel;
-import rgbixtouri.alpha.alphaLayoutManager.LanguageUpdate;
-import rgbixtouri.alpha.alphaLayoutManager.LanguageUpdater;
-import rgbixtouri.alpha.alphaLayoutManager.RGBixtouri;
-import rgbixtouri.alpha.language.Language;
+import controller.ImageLibraryController;
+import controller.ImageLibraryListener;
+import controller.ImageListListener;
 
+import rgbixtouri.alpha.alphaLayoutManager.RGBixtouri;
+
+import language.Language;
+import language.LanguageUpdate;
+import language.LanguageUpdater;
+import model.ImageListModel;
 import net.miginfocom.swing.MigLayout;
 
 
@@ -30,7 +31,7 @@ public class ImageLibraryPanel extends JPanel implements LanguageUpdate {
 	private static final long serialVersionUID = 1L;
 
 	private JScrollPane scrollPanel;
-	protected JList imageList;
+	public JList imageList;
 	private JButton imageButton;
 	private JButton folderButton;
 	

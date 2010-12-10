@@ -4,13 +4,14 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Vector;
 
+import model.AreaCollection;
+import model.ImageModel;
+
 import org.jzy3d.chart.Chart;
 import org.jzy3d.colors.Color;
 import org.jzy3d.maths.Coord3d;
 import org.jzy3d.plot3d.primitives.Scatter;
 
-import rgbixtouri.alpha.alphaLayoutManager.AreaCollection;
-import selector.advanced.models.ImageModel;
 
 public class Chart3D extends Chart implements Observer{
 	String xAxeName;

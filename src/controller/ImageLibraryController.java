@@ -1,4 +1,7 @@
-package rgbixtouri.alpha.alphaLayoutManager;
+package controller;
+
+import gui.ImageLibraryPanel;
+import gui.ProgressDialog;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,6 +10,11 @@ import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
+
+import business.Utils;
+
+
+import model.ImageListModel;
 
 /**
  * @author Stéphane

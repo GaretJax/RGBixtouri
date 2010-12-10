@@ -1,4 +1,4 @@
-package rgbixtouri.alpha.alphaLayoutManager;
+package language;
 
 import java.util.ResourceBundle;
 

@@ -1,4 +1,7 @@
-package rgbixtouri.alpha.alphaLayoutManager;
+package controller;
+
+import gui.Chart2D;
+import gui.ImagePanel;
 
 import java.io.IOException;
 
@@ -6,20 +9,19 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import selector.advanced.ImagePanel;
+import model.ImageListModel;
+
 
 public class ImageListListener implements ListSelectionListener {
 	ImagePanel panelToSet;
 	ImageListModel imageLibrary;
 	Chart2D rg, rb, gb;
-	Chart3D rgb;
-	public ImageListListener(selector.advanced.ImagePanel panelToSet, ImageListModel imageLibrary, Chart2D rg, Chart2D rb, Chart2D gb, Chart3D rgb){
+	public ImageListListener(gui.ImagePanel panelToSet, ImageListModel imageLibrary, Chart2D rg, Chart2D rb, Chart2D gb){
 		this.panelToSet=panelToSet;
 		this.imageLibrary=imageLibrary;
 		this.rg=rg;
 		this.rb=rb;
 		this.gb=gb;
-		this.rgb=rgb;
 	}
 
 	@Override
@@ -43,7 +45,6 @@ public class ImageListListener implements ListSelectionListener {
 					rg.selectedImageChanged(panelToSet.getModel());
 					rb.selectedImageChanged(panelToSet.getModel());
 					gb.selectedImageChanged(panelToSet.getModel());
-					rgb.selectedImageChanged(panelToSet.getModel());
 				}
 			}
 		}

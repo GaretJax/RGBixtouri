@@ -1,4 +1,6 @@
-package selector.advanced;
+package test;
+
+import gui.ImagePanel;
 
 import java.awt.Dimension;
 import java.awt.GraphicsDevice;

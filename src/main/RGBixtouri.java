@@ -1,4 +1,9 @@
-package rgbixtouri.alpha.alphaLayoutManager;
+package main;
+
+
+import gui.GraphesPanel;
+import gui.ImageLibraryPanel;
+import gui.ImagePanel;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -11,11 +16,15 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
-import rgbixtouri.alpha.language.Language;
-import selector.advanced.ImagePanel;
+import language.Language;
+import language.LanguageUpdate;
+import language.LanguageUpdater;
+
 
 import com.atticlabs.zonelayout.swing.ZoneLayout;
 import com.atticlabs.zonelayout.swing.ZoneLayoutFactory;
+
+import controller.MenuBarListener;
 
 /**
  * 
@@ -27,7 +36,7 @@ public class RGBixtouri extends JFrame implements LanguageUpdate{
 	private static final long serialVersionUID = 1L;
 
 	private ImageLibraryPanel imageSelectorPanel;
-	public selector.advanced.ImagePanel imagePanel;
+	public gui.ImagePanel imagePanel;
 	public GraphesPanel graphesPanel;
 	private ClustersPanel clustersPanel;
 	

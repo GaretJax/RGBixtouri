@@ -1,4 +1,4 @@
-package rgbixtouri.alpha.alphaLayoutManager;
+package language;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,6 @@ import java.util.ResourceBundle;
 
 import javax.swing.JComponent;
 
-import rgbixtouri.alpha.language.Language;
 
 public class LanguageUpdater {
 	private static LanguageUpdater languageUpdater;

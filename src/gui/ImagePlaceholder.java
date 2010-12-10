@@ -1,4 +1,4 @@
-package selector.advanced;
+package gui;
 
 import java.awt.BorderLayout;
 import java.util.ResourceBundle;
@@ -6,9 +6,10 @@ import java.util.ResourceBundle;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import rgbixtouri.alpha.alphaLayoutManager.LanguageUpdate;
-import rgbixtouri.alpha.alphaLayoutManager.LanguageUpdater;
-import rgbixtouri.alpha.language.Language;
+import language.Language;
+import language.LanguageUpdate;
+import language.LanguageUpdater;
+
 
 
 public class ImagePlaceholder extends JPanel implements LanguageUpdate {

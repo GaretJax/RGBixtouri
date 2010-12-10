@@ -1,4 +1,4 @@
-package selector.advanced.models;
+package model;
 
 import java.awt.Dimension;
 import java.awt.Rectangle;
@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 import java.util.Observable;
 import java.util.Observer;
 
-import rgbixtouri.alpha.alphaLayoutManager.AreaCollection;
+
 
 public class ImageModel extends Observable implements Observer {
     

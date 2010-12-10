@@ -1,7 +1,10 @@
-package rgbixtouri.alpha.alphaLayoutManager;
+package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import language.LanguageUpdater;
+
 
 public class MenuBarListener implements ActionListener{
 	private int menuAction;
