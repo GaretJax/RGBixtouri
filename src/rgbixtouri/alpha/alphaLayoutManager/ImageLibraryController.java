@@ -71,6 +71,7 @@ public class ImageLibraryController implements ActionListener {
 					JOptionPane.showMessageDialog(parent, errorMessage, "Problem", JOptionPane.ERROR_MESSAGE);
 				}
 			}
+			
 		}
 		
 	}

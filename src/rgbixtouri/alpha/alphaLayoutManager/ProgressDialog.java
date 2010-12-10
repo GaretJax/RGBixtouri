@@ -72,7 +72,7 @@ public class ProgressDialog extends JDialog implements PropertyChangeListener, L
 			int counter=0;
 			for (String imageName : imagesList) {
 				listModel.addImage(folder.getAbsolutePath()+"\\"+imageName);
-				System.out.println("...");
+				//System.out.println("...");
 				setProgress(++counter*100/imagesList.length);
 			}
 			return null;
