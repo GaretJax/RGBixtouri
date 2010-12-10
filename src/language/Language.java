@@ -21,7 +21,7 @@ public class Language {
 	private static Language instanceOfLanguage;
 	
 	//Constant for the place of the properties files
-	final private String PROPERTIES_FILE_NAME = "rgbixtouri.alpha.language.MessageBundle";
+	final private String PROPERTIES_FILE_NAME = "language.MessageBundle";
 	
 	/**
 	 * Basic constructor of resourceBundle (Use default language)
