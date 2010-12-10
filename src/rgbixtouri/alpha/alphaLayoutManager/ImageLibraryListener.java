@@ -14,6 +14,7 @@ public class ImageLibraryListener implements PropertyChangeListener{
 	@Override
 	public void propertyChange(PropertyChangeEvent event) {
 		imageLibrary.imageList.updateUI();
+		imageLibrary.revalidate();
 	}
 
 }

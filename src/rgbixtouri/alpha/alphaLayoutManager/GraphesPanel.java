@@ -28,12 +28,12 @@ public class GraphesPanel extends JPanel{
 		
 		//Zone layout is the layout manager used
 		zLayout = ZoneLayoutFactory.newZoneLayout();
-		zLayout.addRow("a+ab+bc+c");
+//		zLayout.addRow("a+ab+bc+c");
 		zLayout.addRow("d+......d");
 		zLayout.compile();
-		zLayout.getZone("a").setTake(33,35);
-		zLayout.getZone("b").setTake(33, 35);
-		zLayout.getZone("c").setTake(33, 35);
+//		zLayout.getZone("a").setTake(33,35);
+//		zLayout.getZone("b").setTake(33, 35);
+//		zLayout.getZone("c").setTake(33, 35);
 		zLayout.getZone("d").setTake(100, 65);
 		
 		
@@ -46,9 +46,9 @@ public class GraphesPanel extends JPanel{
 		gbChart=new Chart2D("GB", "G", "B", Color.WHITE, chartType.GB);
 //		Chart2D rgbChart=new Chart2D("RGB", "3d", "3d", Color.WHITE, chartType.RG);
 		rgbChart=new Chart3D("Red", "Green", "Blue");
-		this.add(rgChart, "a");
-		this.add(rbChart, "b");
-		this.add(gbChart, "c");
+//		this.add(rgChart, "a");
+//		this.add(rbChart, "b");
+//		this.add(gbChart, "c");
 		
 	
 		
@@ -59,7 +59,6 @@ public class GraphesPanel extends JPanel{
 //		this.add(rgbChart, "d");
 		ChartMouseController mouse = new ChartMouseController();
 		rgbChart.addController(mouse);
-		this.addComponentListener(new RgbComponentListener(rgbChart));
 	}
 	
 }
