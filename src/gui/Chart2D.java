@@ -28,7 +28,7 @@ public class Chart2D extends JPanel implements Observer {
 	String chartName;
 	Color bgColor;
 	chartType type;
-	
+
 	private Vector<Point> pixelsInWound;
 	private Vector<Point> pixelsInSkin;
 
@@ -41,7 +41,7 @@ public class Chart2D extends JPanel implements Observer {
 		this.chartName=chartName;
 		this.bgColor=bgColor;
 		this.type=type;
-		
+
 		pixelsInWound = new Vector<Point>();
 		pixelsInSkin = new Vector<Point>();
 	}
@@ -124,9 +124,9 @@ public class Chart2D extends JPanel implements Observer {
 		ImageModel imageSelection = (ImageModel) selection;
 		AreaCollection wound=imageSelection.getArea(ImageModel.Zone.WOUND);
 		Integer[] woundColors=wound.getColors();
-		
+
 		pixelsInWound.clear();
-				
+
 		if(type==chartType.RG){
 			int red;
 			int green;
@@ -155,9 +155,9 @@ public class Chart2D extends JPanel implements Observer {
 		}
 		AreaCollection skin=imageSelection.getArea(ImageModel.Zone.SKIN);
 		Integer[] skinColors=skin.getColors();
-		
+
 		pixelsInSkin.clear();
-		
+
 		if(type==chartType.RG){
 			int red;
 			int green;
@@ -183,6 +183,62 @@ public class Chart2D extends JPanel implements Observer {
 				pixelsInSkin.add(new Point(green, blue));
 			}
 		}
-	this.repaint();
+		this.repaint();
+	}
+
+	public String getxAxeName() {
+		return xAxeName;
+	}
+
+	public void setxAxeName(String xAxeName) {
+		this.xAxeName = xAxeName;
+	}
+
+	public String getyAxeName() {
+		return yAxeName;
+	}
+
+	public void setyAxeName(String yAxeName) {
+		this.yAxeName = yAxeName;
+	}
+
+	public chartType getType() {
+		return type;
+	}
+
+	public void setType(chartType type) {
+		this.type = type;
+	}
+
+	public String getChartName() {
+		return chartName;
+	}
+
+	public void setChartName(String chartName) {
+		this.chartName = chartName;
+	}
+
+	public Color getBgColor() {
+		return bgColor;
+	}
+
+	public void setBgColor(Color bgColor) {
+		this.bgColor = bgColor;
+	}
+
+	public Vector<Point> getPixelsInWound() {
+		return pixelsInWound;
+	}
+
+	public void setPixelsInWound(Vector<Point> pixelsInWound) {
+		this.pixelsInWound = pixelsInWound;
+	}
+
+	public Vector<Point> getPixelsInSkin() {
+		return pixelsInSkin;
+	}
+
+	public void setPixelsInSkin(Vector<Point> pixelsInSkin) {
+		this.pixelsInSkin = pixelsInSkin;
 	}
 }
