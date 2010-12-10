@@ -44,7 +44,7 @@ public class SelectedArea extends JComponent implements AncestorListener, FocusL
         this.addFocusListener(this);
     }
     
-    protected void recalculateBounds() {
+    public void recalculateBounds() {
         double ratio = this.container.getDisplayRatio();
         int s = this.container.getHandleSize();
         

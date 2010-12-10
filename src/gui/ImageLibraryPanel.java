@@ -13,11 +13,11 @@ import controller.ImageLibraryController;
 import controller.ImageLibraryListener;
 import controller.ImageListListener;
 
-import rgbixtouri.alpha.alphaLayoutManager.RGBixtouri;
 
 import language.Language;
 import language.LanguageUpdate;
 import language.LanguageUpdater;
+import main.RGBixtouri;
 import model.ImageListModel;
 import net.miginfocom.swing.MigLayout;
 

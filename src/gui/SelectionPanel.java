@@ -26,7 +26,7 @@ public class SelectionPanel extends JLayeredPane implements ComponentListener {
     public final static Integer WOUND_LAYER = new Integer(2);
     public final static Integer SKIN_LAYER = new Integer(1);
     
-    final ImageModel model;
+    public final ImageModel model;
     private final SelectionEditor editor;
     
     public SelectionPanel(ImageModel model) {
@@ -38,15 +38,15 @@ public class SelectionPanel extends JLayeredPane implements ComponentListener {
         this.add(this.editor, SelectionPanel.EDITOR_LAYER);
     }
     
-    int getHandleSize() {
+    public int getHandleSize() {
         return Math.min((int) (this.getWidth() / 80.0) + 4, 10);
     }
     
-    Rectangle getImageBounds() {
+    public Rectangle getImageBounds() {
         return this.model.getBounds(this.getSize());
     }
     
-    double getDisplayRatio() {
+    public double getDisplayRatio() {
         return this.getImageBounds().width * 1. / this.model.getSize().width;
     }
     

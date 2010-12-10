@@ -38,7 +38,6 @@ public class RGBixtouri extends JFrame implements LanguageUpdate{
 	private ImageLibraryPanel imageSelectorPanel;
 	public gui.ImagePanel imagePanel;
 	public GraphesPanel graphesPanel;
-	private ClustersPanel clustersPanel;
 	
 	private JMenuBar jMenuBar;
 	private JMenu menuMenu, submenuLang;
@@ -84,8 +83,6 @@ public class RGBixtouri extends JFrame implements LanguageUpdate{
 		imagePanel.setPreferredSize(new Dimension(300, 300));
 		graphesPanel = new GraphesPanel();
 		graphesPanel.setPreferredSize(new Dimension(300, 300));
-		clustersPanel = new ClustersPanel();
-		clustersPanel.setPreferredSize(new Dimension(300, 150));
 		imageSelectorPanel = new ImageLibraryPanel(this);
 		imageSelectorPanel.setPreferredSize(new Dimension(200, 200));
 		
