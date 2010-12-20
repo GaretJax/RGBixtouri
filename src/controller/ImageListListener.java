@@ -15,8 +15,10 @@ import model.ImageListModel;
 public class ImageListListener implements ListSelectionListener {
 	ImagePanel panelToSet;
 	ImageListModel imageLibrary;
+	ListSelectionModel listModel;
 	Chart2D rg, rb, gb, slot;
-	public ImageListListener(gui.ImagePanel panelToSet, ImageListModel imageLibrary, Chart2D rg, Chart2D rb, Chart2D gb, Chart2D slot){
+	public ImageListListener(gui.ImagePanel panelToSet, ImageListModel imageLibrary, Chart2D rg, Chart2D rb, Chart2D gb, Chart2D slot, ListSelectionModel listModel){
+		this.listModel=listModel;
 		this.panelToSet=panelToSet;
 		this.imageLibrary=imageLibrary;
 		this.rg=rg;
@@ -49,6 +51,7 @@ public class ImageListListener implements ListSelectionListener {
 					slot.selectedImageChanged(panelToSet.getModel());
 				}
 			}
+			listModel.clearSelection();
 		}
 	}
 
