@@ -140,12 +140,14 @@ public class SelectionEditor extends JPanel implements MouseListener,
 
 	Vector<Point> areaStub = null;
 	Point currentLocation = null;
+	boolean isEditing = false;
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
+	    Point p = e.getPoint();
+	    
 		this.requestFocusInWindow();
 
-		Point p = e.getPoint();
 		Rectangle b = this.container.getImageBounds();
 		if (!(p.x < b.x || p.y < b.y || p.x > b.x + b.width || p.y > b.y+ b.height)) {
 			
