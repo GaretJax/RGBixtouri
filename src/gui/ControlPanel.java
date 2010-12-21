@@ -10,7 +10,6 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import controller.SelectionEditor;
-import controller.SelectionEditor.Mode;
 
 
 import language.Language;
@@ -48,6 +47,12 @@ public class ControlPanel extends JPanel implements LanguageUpdate{
         });
         
         modify = new JButton(Language.getResourceBundle().getString("controlpanel.button.modify.msg"));
+        modify.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                imgPanel.setMode(SelectionEditor.Mode.EDITING);
+            }
+        });
         this.add(modify);
         this.add(skin);
         this.add(wound);

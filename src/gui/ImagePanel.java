@@ -16,7 +16,6 @@ import javax.swing.JPanel;
 import model.ImageModel;
 
 import controller.SelectionEditor;
-import controller.SelectionEditor.Mode;
 
 
 public class ImagePanel extends JPanel {

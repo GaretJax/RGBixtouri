@@ -6,6 +6,8 @@ import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.geom.Area;
 import java.util.Vector;
 
@@ -15,10 +17,9 @@ import model.ImageModel;
 
 import controller.SelectedArea;
 import controller.SelectionEditor;
-import controller.SelectionEditor.Mode;
 
 
-public class SelectionPanel extends JLayeredPane implements ComponentListener {
+public class SelectionPanel extends JLayeredPane implements ComponentListener, MouseListener {
     
     private static final long serialVersionUID = 2044905103542084967L;
     
@@ -36,6 +37,7 @@ public class SelectionPanel extends JLayeredPane implements ComponentListener {
         
         this.editor = new SelectionEditor(this);
         this.add(this.editor, SelectionPanel.EDITOR_LAYER);
+        this.addMouseListener(this);
     }
     
     public int getHandleSize() {
@@ -51,6 +53,7 @@ public class SelectionPanel extends JLayeredPane implements ComponentListener {
     }
     
     public void setMode(SelectionEditor.Mode mode) {
+        this.editor.setVisible(mode != SelectionEditor.Mode.EDITING);   
         this.editor.setMode(mode);
     }
     
@@ -63,6 +66,7 @@ public class SelectionPanel extends JLayeredPane implements ComponentListener {
         
         this.addArea(new Area(poly), zone);
     }
+
     
     public void addArea(Area area, ImageModel.Zone zone) {
         Integer layer;
@@ -76,7 +80,7 @@ public class SelectionPanel extends JLayeredPane implements ComponentListener {
         SelectedArea a = new SelectedArea(area, zone, this);
         this.add(a, layer, 0);
         
-        a.requestFocusInWindow();
+        this.requestFocusInWindow();
     }
     
     @Override
@@ -102,6 +106,35 @@ public class SelectionPanel extends JLayeredPane implements ComponentListener {
     
     @Override
     public void componentShown(ComponentEvent e) {
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        this.requestFocusInWindow();
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        // TODO Auto-generated method stub
+        
     }
     
 }
