@@ -50,10 +50,11 @@ public class ImageLibraryPanel extends JPanel implements LanguageUpdate {
 		imageList.setLayoutOrientation(JList.VERTICAL);
 		imageList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
-		ImageListListener selectionListener = new ImageListListener(mainFrame.imagePanel, listModel, mainFrame.graphesPanel.rgChart,
-				mainFrame.graphesPanel.rbChart, mainFrame.graphesPanel.gbChart);
 		ListSelectionModel listSelectionModel = imageList.getSelectionModel();
+		ImageListListener selectionListener = new ImageListListener(mainFrame.imagePanel, listModel, mainFrame.graphesPanel.rgChart,
+				mainFrame.graphesPanel.rbChart, mainFrame.graphesPanel.gbChart, mainFrame.graphesPanel.rgbSlot, listSelectionModel);
 		listSelectionModel.addListSelectionListener(selectionListener);
+		listSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 		scrollPanel = new JScrollPane(imageList);
 		

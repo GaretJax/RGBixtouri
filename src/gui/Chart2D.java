@@ -6,11 +6,14 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
+import java.util.HashSet;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Set;
 import java.util.Vector;
 
 import javax.swing.JPanel;
+import javax.swing.SwingWorker;
 
 import model.AreaCollection;
 import model.ImageModel;
@@ -28,9 +31,9 @@ public class Chart2D extends JPanel implements Observer {
 	String chartName;
 	Color bgColor;
 	chartType type;
-	
-	private Vector<Point> pixelsInWound;
-	private Vector<Point> pixelsInSkin;
+
+	private Set<Point> pixelsInWound;
+	private Set<Point> pixelsInSkin;
 
 	double xOneUnitSize;
 	double yOneUnitSize;
@@ -41,9 +44,9 @@ public class Chart2D extends JPanel implements Observer {
 		this.chartName=chartName;
 		this.bgColor=bgColor;
 		this.type=type;
-		
-		pixelsInWound = new Vector<Point>();
-		pixelsInSkin = new Vector<Point>();
+
+		pixelsInWound = new HashSet<Point>();
+		pixelsInSkin = new HashSet<Point>();
 	}
 
 	public void paintComponent(Graphics g) {
@@ -70,6 +73,15 @@ public class Chart2D extends JPanel implements Observer {
 		double xAxeSize=75*width/100;
 		Line2D.Double xAxe = new Line2D.Double(xOfXAxe, yOfXAxe, xOfXAxe+xAxeSize, yOfXAxe);
 		g2d.draw(xAxe);
+		
+		//AXE X graduation
+		int nbPas=10;
+		int pas = (int) Math.round(Math.ceil((xAxeSize-10) / (nbPas - 1)));
+		int crtPosOnAxe=(int) xOfXAxe;
+		for(int i=0; i<nbPas; i++){
+			crtPosOnAxe+=pas;
+			g2d.draw(new Line2D.Double(crtPosOnAxe,yOfXAxe,crtPosOnAxe, yOfXAxe+5));
+		}
 
 		//AXE Y
 		double xOfYAxe=xOfXAxe;
@@ -78,6 +90,15 @@ public class Chart2D extends JPanel implements Observer {
 		Line2D.Double yAxe = new Line2D.Double(xOfYAxe, yOfYAxe, xOfYAxe, yOfYAxe+yAxeSize);
 		g2d.draw(yAxe);
 
+		//AXE Y graduation
+		nbPas=10;
+		pas = (int) Math.round(Math.ceil((yAxeSize-27) / (nbPas - 1)));
+		crtPosOnAxe=(int) yOfXAxe;
+		for(int i=0; i<nbPas; i++){
+			crtPosOnAxe-=pas;
+			g2d.draw(new Line2D.Double(xOfYAxe,crtPosOnAxe,xOfYAxe-5, crtPosOnAxe));
+		}
+		
 		//AXE Y name
 		g2d.rotate(-Math.PI/2);
 		float xOfYAxeName=50*(-1)*height/100;
@@ -118,71 +139,145 @@ public class Chart2D extends JPanel implements Observer {
 		update(is, is);
 	}
 
+	public String getxAxeName() {
+		return xAxeName;
+	}
+
+	public void setxAxeName(String xAxeName) {
+		this.xAxeName = xAxeName;
+	}
+
+	public String getyAxeName() {
+		return yAxeName;
+	}
+
+	public void setyAxeName(String yAxeName) {
+		this.yAxeName = yAxeName;
+	}
+
+	public chartType getType() {
+		return type;
+	}
+
+	public void setType(chartType type) {
+		this.type = type;
+	}
+
+	public String getChartName() {
+		return chartName;
+	}
+
+	public void setChartName(String chartName) {
+		this.chartName = chartName;
+	}
+
+	public Color getBgColor() {
+		return bgColor;
+	}
+
+	public void setBgColor(Color bgColor) {
+		this.bgColor = bgColor;
+	}
+
+	public Set<Point> getPixelsInWound() {
+		return pixelsInWound;
+	}
+
+	public void setPixelsInWound(Set<Point> pixelsInWound) {
+		this.pixelsInWound = pixelsInWound;
+	}
+
+	public Set<Point> getPixelsInSkin() {
+		return pixelsInSkin;
+	}
+
+	public void setPixelsInSkin(Set<Point> pixelsInSkin) {
+		this.pixelsInSkin = pixelsInSkin;
+	}
+	
 	@Override 
 	public void update(Observable selection, Object _) {
-		//System.out.println("update");
-		ImageModel imageSelection = (ImageModel) selection;
-		AreaCollection wound=imageSelection.getArea(ImageModel.Zone.WOUND);
-		Integer[] woundColors=wound.getColors();
-		
-		pixelsInWound.clear();
-				
-		if(type==chartType.RG){
-			int red;
-			int green;
-			for (int color : woundColors) {			
-				red=(color & 0xff0000) >> 16;
-				green=(color & 0xff00) >> 8;
-				pixelsInWound.add(new Point(red, green));
-			}
-			//			blue = pixel & 0xff;
-		} else if(type==chartType.RB){
-			int red;
-			int blue;
-			for (int color : woundColors) {
-				red=(color & 0xff0000) >> 16;
-				blue=(color & 0xff);
-				pixelsInWound.add(new Point(red, blue));
-			}
-		} else if(type==chartType.GB){
-			int green;
-			int blue;
-			for (int color : woundColors) {
-				green=(color & 0xff00) >> 8;
-				blue=(color & 0xff);
-				pixelsInWound.add(new Point(green, blue));
-			}
+		LoadPixel lp = new LoadPixel(this, selection);
+		lp.execute();
+	}
+
+	private class LoadPixel extends SwingWorker<Void, Void>{
+		Observable selection;
+		Chart2D parentChart;
+		public LoadPixel(Chart2D parentChart, Observable selection){
+			this.selection=selection;
+			this.parentChart=parentChart;
 		}
-		AreaCollection skin=imageSelection.getArea(ImageModel.Zone.SKIN);
-		Integer[] skinColors=skin.getColors();
 		
-		pixelsInSkin.clear();
+		protected Void doInBackground() throws Exception {
+			ImageModel imageSelection = (ImageModel) selection;
+			AreaCollection wound=imageSelection.getArea(ImageModel.Zone.WOUND);
+			Integer[] woundColors=wound.getColors();
 		
-		if(type==chartType.RG){
-			int red;
-			int green;
-			for(int color : skinColors){
-				red=(color & 0xff0000) >> 16;
-				green=(color & 0xff00) >> 8;
-				pixelsInSkin.add(new Point(red, green));
+			pixelsInWound.clear();
+		
+			if(type==chartType.RG){
+				int red;
+				int green;
+				for (int color : woundColors) {			
+					red=(color & 0xff0000) >> 16;
+					green=(color & 0xff00) >> 8;
+					pixelsInWound.add(new Point(red, green));
+				}
+				//			blue = pixel & 0xff;
+			} else if(type==chartType.RB){
+				int red;
+				int blue;
+				for (int color : woundColors) {
+					red=(color & 0xff0000) >> 16;
+					blue=(color & 0xff);
+					pixelsInWound.add(new Point(red, blue));
+				}
+			} else if(type==chartType.GB){
+				int green;
+				int blue;
+				for (int color : woundColors) {
+					green=(color & 0xff00) >> 8;
+					blue=(color & 0xff);
+					pixelsInWound.add(new Point(green, blue));
+				}
 			}
-		} else if(type==chartType.RB){
-			int red;
-			int blue;
-			for(int color : skinColors){
-				red=(color & 0xff0000) >> 16;
-				blue=(color & 0xff);
-				pixelsInSkin.add(new Point(red, blue));
+			AreaCollection skin=imageSelection.getArea(ImageModel.Zone.SKIN);
+			Integer[] skinColors=skin.getColors();
+		
+			pixelsInSkin.clear();
+		
+			if(type==chartType.RG){
+				int red;
+				int green;
+				for(int color : skinColors){
+					red=(color & 0xff0000) >> 16;
+					green=(color & 0xff00) >> 8;
+					pixelsInSkin.add(new Point(red, green));
+				}
+			} else if(type==chartType.RB){
+				int red;
+				int blue;
+				for(int color : skinColors){
+					red=(color & 0xff0000) >> 16;
+					blue=(color & 0xff);
+					pixelsInSkin.add(new Point(red, blue));
+				}
+			} else if(type==chartType.GB){
+				int green;
+				int blue;
+				for(int color : skinColors){
+					green=(color & 0xff00) >> 8;
+					blue=(color & 0xff);
+					pixelsInSkin.add(new Point(green, blue));
+				}
 			}
-		} else if(type==chartType.GB){
-			int green;
-			int blue;
-			for(int color : skinColors){
-				green=(color & 0xff00) >> 8;
-				blue=(color & 0xff);
-				pixelsInSkin.add(new Point(green, blue));
-			}
+			
+			return null;
 		}
-	this.repaint();
+		
+		protected void done(){
+			parentChart.repaint();
+		}
 	}
 }

@@ -62,7 +62,7 @@ public class RGBixtouri extends JFrame implements LanguageUpdate{
 	 */
 	private void buildUI() {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-
+		this.setTitle("RGBixtouri");
 		// Zone layout is the layout manager used
 		ZoneLayout zLayout = ZoneLayoutFactory.newZoneLayout();
 		zLayout.addRow("B+I+.G+.");
