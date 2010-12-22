@@ -2,6 +2,7 @@ package controller;
 
 import gui.Chart2D;
 import gui.ImagePanel;
+import gui.ZoneStatePanel;
 
 import java.io.IOException;
 
@@ -17,7 +18,8 @@ public class ImageListListener implements ListSelectionListener {
 	ImageListModel imageLibrary;
 	ListSelectionModel listModel;
 	Chart2D rg, rb, gb, slot;
-	public ImageListListener(gui.ImagePanel panelToSet, ImageListModel imageLibrary, Chart2D rg, Chart2D rb, Chart2D gb, Chart2D slot, ListSelectionModel listModel){
+	ZoneStatePanel zonePanel;
+	public ImageListListener(gui.ImagePanel panelToSet, ImageListModel imageLibrary, Chart2D rg, Chart2D rb, Chart2D gb, Chart2D slot, ListSelectionModel listModel, ZoneStatePanel zonePanel){
 		this.listModel=listModel;
 		this.panelToSet=panelToSet;
 		this.imageLibrary=imageLibrary;
@@ -25,6 +27,7 @@ public class ImageListListener implements ListSelectionListener {
 		this.rb=rb;
 		this.gb=gb;
 		this.slot=slot;
+		this.zonePanel=zonePanel;
 	}
 
 	@Override
@@ -49,6 +52,7 @@ public class ImageListListener implements ListSelectionListener {
 					rb.selectedImageChanged(panelToSet.getModel());
 					gb.selectedImageChanged(panelToSet.getModel());
 					slot.selectedImageChanged(panelToSet.getModel());
+					zonePanel.selectedImageChanged(panelToSet.getModel());
 				}
 			}
 			listModel.clearSelection();

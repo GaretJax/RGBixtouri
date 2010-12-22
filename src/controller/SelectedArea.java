@@ -6,7 +6,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
-import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.event.FocusEvent;
@@ -99,7 +98,7 @@ public class SelectedArea extends JComponent implements AncestorListener, FocusL
         return this.area.createTransformedArea(at);
     }
     
-    private Point scalePointBack(Point p) {
+    private Point scalePointBack(final Point p) {
         double ratio = this.container.getDisplayRatio();
         Rectangle bounds = this.getBounds();
         Rectangle cb = this.container.getImageBounds();

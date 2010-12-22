@@ -52,7 +52,7 @@ public class ImageLibraryPanel extends JPanel implements LanguageUpdate {
 		
 		ListSelectionModel listSelectionModel = imageList.getSelectionModel();
 		ImageListListener selectionListener = new ImageListListener(mainFrame.imagePanel, listModel, mainFrame.graphesPanel.rgChart,
-				mainFrame.graphesPanel.rbChart, mainFrame.graphesPanel.gbChart, mainFrame.graphesPanel.rgbSlot, listSelectionModel);
+				mainFrame.graphesPanel.rbChart, mainFrame.graphesPanel.gbChart, mainFrame.graphesPanel.rgbSlot, listSelectionModel, mainFrame.graphesPanel.zonePanel);
 		listSelectionModel.addListSelectionListener(selectionListener);
 		listSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
