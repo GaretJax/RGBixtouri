@@ -23,6 +23,7 @@ public class ImageLibraryController implements ActionListener {
 
 private ImageLibraryPanel parent;
 private ImageListModel listModel;
+@SuppressWarnings("unused")
 private ProgressDialog progressDialog;
 private File f;
 

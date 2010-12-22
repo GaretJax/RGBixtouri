@@ -98,7 +98,9 @@ public class SelectedArea extends JComponent implements AncestorListener, FocusL
         return this.area.createTransformedArea(at);
     }
     
-    private Point scalePointBack(final Point p) {
+    
+    @SuppressWarnings("unused")
+	private Point scalePointBack(final Point p) {
         double ratio = this.container.getDisplayRatio();
         Rectangle bounds = this.getBounds();
         Rectangle cb = this.container.getImageBounds();
