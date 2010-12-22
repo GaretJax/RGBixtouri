@@ -23,11 +23,13 @@ public class ImageModel extends Observable implements Observer {
     public ImageModel(BufferedImage image) {
         this.image = image;
         this.ratio = image.getWidth() * 1. / image.getHeight();
-        
+                
         for (int i = this.areas.length-1; i>=0; i--) {
             this.areas[i] = new AreaCollection(this);
             this.areas[i].addObserver(this);
         }
+        areas[0].setType(Zone.SKIN);
+        areas[1].setType(Zone.WOUND);
 
     }
     

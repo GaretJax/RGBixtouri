@@ -4,18 +4,19 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
-import java.awt.RenderingHints;
-import java.awt.geom.PathIterator;
 
 import javax.swing.JComponent;
 
-import controller.SelectedArea;
-
 import model.ImageModel;
+import controller.SelectedArea;
 
 public class Handle extends JComponent {
     
-    Color handleColor;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	Color handleColor;
     Color borderColor;
     
     int x;
