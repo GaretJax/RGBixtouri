@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.table.TableColumn;
 
 import model.ImageModel;
 import model.ImageModel.Zone;
@@ -28,9 +29,11 @@ public class ZoneStatePanel extends JPanel implements Observer{
 	public ZoneStatePanel(){
 		Dimension screen = new Dimension(this.getWidth(), 50);
 		this.setLayout(new BorderLayout());
-		zonesTableWound=new JTable(3,3);
+		zonesTableWound=new JTable();
+		zonesTableWound.setModel(new ZoneTableModel(null));
 		zonesTableWound.setPreferredScrollableViewportSize(screen);
-		zonesTableSkin=new JTable(3,3);
+		zonesTableSkin=new JTable();
+		zonesTableSkin.setModel(new ZoneTableModel(null));
 		zonesTableSkin.setPreferredScrollableViewportSize(screen);
 		scrollPaneWound=new JScrollPane(zonesTableWound, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPaneSkin= new JScrollPane(zonesTableSkin, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);

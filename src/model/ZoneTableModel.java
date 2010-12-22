@@ -16,8 +16,12 @@ public class ZoneTableModel extends AbstractTableModel implements Observer {
 	AreaCollection myCollection;
 
 	public ZoneTableModel(AreaCollection collection) {
-		this.myCollection = collection;
-		myCollection.addObserver(this);
+		if(collection!=null){
+			this.myCollection = collection;
+			myCollection.addObserver(this);
+		} else{
+			this.myCollection=null;
+		}
 	}
 
 	@Override
@@ -42,6 +46,8 @@ public class ZoneTableModel extends AbstractTableModel implements Observer {
 	@Override
 	public int getRowCount() {
 		// TODO Auto-generated method stub
+		if(myCollection==null)
+			return 0;
 		return myCollection.areas.size();
 	}
 
